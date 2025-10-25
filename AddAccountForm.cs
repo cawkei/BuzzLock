@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Microsoft.Data.Sqlite;
 
+
 namespace BuzzLock
 {
     public partial class AddAccountForm : Form
@@ -81,6 +82,21 @@ namespace BuzzLock
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAccount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
         {
 
         }
