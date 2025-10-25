@@ -12,6 +12,7 @@ namespace BuzzLock
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new VaultForm());
+            //no changes/ testing purposes
         }
     }
 }
