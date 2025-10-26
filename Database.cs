@@ -16,7 +16,9 @@ namespace BuzzLock
             using (var conn = GetConnection())
             {
                 conn.Open();
-                string createTable = @"
+
+                // Create Vault table
+                string createVaultTable = @"
                     CREATE TABLE IF NOT EXISTS Vault (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
                         Account TEXT NOT NULL,
@@ -26,7 +28,21 @@ namespace BuzzLock
                     );
                 ";
 
-                using (var cmd = new SqliteCommand(createTable, conn))
+                // Create Users table (for login & registration)
+                string createUsersTable = @"
+                    CREATE TABLE IF NOT EXISTS Users (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Username TEXT NOT NULL UNIQUE,
+                        Password TEXT NOT NULL
+                    );
+                ";
+
+                using (var cmd = new SqliteCommand(createVaultTable, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                using (var cmd = new SqliteCommand(createUsersTable, conn))
                 {
                     cmd.ExecuteNonQuery();
                 }

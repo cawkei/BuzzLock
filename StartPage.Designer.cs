@@ -35,7 +35,6 @@ namespace BuzzLock1._0
             usernametxt = new TextBox();
             passwordtxt = new TextBox();
             showPW_chkbox = new CheckBox();
-            label1 = new Label();
             forgotPasswordLinkLabel = new LinkLabel();
             close_Label = new Label();
             SuspendLayout();
@@ -61,6 +60,7 @@ namespace BuzzLock1._0
             // login_BTN
             // 
             login_BTN.BackColor = Color.Transparent;
+            login_BTN.Cursor = Cursors.Hand;
             login_BTN.FlatAppearance.BorderSize = 0;
             login_BTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
             login_BTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -75,55 +75,53 @@ namespace BuzzLock1._0
             // usernametxt
             // 
             usernametxt.BackColor = Color.Honeydew;
-            usernametxt.Location = new Point(643, 234);
+            usernametxt.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            usernametxt.ForeColor = SystemColors.WindowText;
+            usernametxt.Location = new Point(643, 231);
             usernametxt.Name = "usernametxt";
             usernametxt.PlaceholderText = "Username";
-            usernametxt.Size = new Size(296, 31);
+            usernametxt.Size = new Size(296, 34);
             usernametxt.TabIndex = 2;
             usernametxt.TextChanged += usernametxt_TextChanged;
             // 
             // passwordtxt
             // 
             passwordtxt.BackColor = Color.Honeydew;
-            passwordtxt.Location = new Point(643, 367);
+            passwordtxt.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passwordtxt.Location = new Point(643, 370);
             passwordtxt.Name = "passwordtxt";
             passwordtxt.PlaceholderText = "Password";
-            passwordtxt.Size = new Size(296, 31);
+            passwordtxt.Size = new Size(296, 34);
             passwordtxt.TabIndex = 3;
+            passwordtxt.TextChanged += passwordtxt_TextChanged;
             // 
             // showPW_chkbox
             // 
             showPW_chkbox.AutoSize = true;
             showPW_chkbox.BackColor = Color.Transparent;
-            showPW_chkbox.Location = new Point(634, 452);
+            showPW_chkbox.Cursor = Cursors.Hand;
+            showPW_chkbox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            showPW_chkbox.Location = new Point(828, 449);
             showPW_chkbox.Name = "showPW_chkbox";
-            showPW_chkbox.Size = new Size(162, 29);
+            showPW_chkbox.Size = new Size(172, 32);
             showPW_chkbox.TabIndex = 4;
             showPW_chkbox.Text = "Show Password";
             showPW_chkbox.UseVisualStyleBackColor = false;
             showPW_chkbox.CheckedChanged += show_Password;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Location = new Point(634, 308);
-            label1.Name = "label1";
-            label1.Size = new Size(87, 25);
-            label1.TabIndex = 6;
-            label1.Text = "Password";
-            // 
             // forgotPasswordLinkLabel
             // 
             forgotPasswordLinkLabel.AutoSize = true;
             forgotPasswordLinkLabel.BackColor = Color.Transparent;
+            forgotPasswordLinkLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             forgotPasswordLinkLabel.LinkColor = Color.Black;
-            forgotPasswordLinkLabel.Location = new Point(842, 452);
+            forgotPasswordLinkLabel.Location = new Point(625, 453);
             forgotPasswordLinkLabel.Name = "forgotPasswordLinkLabel";
-            forgotPasswordLinkLabel.Size = new Size(154, 25);
+            forgotPasswordLinkLabel.Size = new Size(167, 28);
             forgotPasswordLinkLabel.TabIndex = 7;
             forgotPasswordLinkLabel.TabStop = true;
             forgotPasswordLinkLabel.Text = "Forgot Password?";
+            forgotPasswordLinkLabel.LinkClicked += forgotPasswordLinkLabel_LinkClicked;
             // 
             // close_Label
             // 
@@ -141,13 +139,11 @@ namespace BuzzLock1._0
             // 
             // StartPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1183, 672);
+            ClientSize = new Size(1176, 654);
             Controls.Add(close_Label);
             Controls.Add(forgotPasswordLinkLabel);
-            Controls.Add(label1);
             Controls.Add(showPW_chkbox);
             Controls.Add(passwordtxt);
             Controls.Add(usernametxt);
@@ -174,7 +170,6 @@ namespace BuzzLock1._0
         private TextBox usernametxt;
         private TextBox passwordtxt;
         private CheckBox showPW_chkbox;
-        private Label label1;
         private LinkLabel forgotPasswordLinkLabel;
         private Label close_Label;
     }

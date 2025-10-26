@@ -39,17 +39,18 @@
             register_ConfirmPassword = new TextBox();
             label3 = new Label();
             close_Label = new Label();
+            registerBtn = new Button();
             SuspendLayout();
             // 
             // loginLinkLabel
             // 
             loginLinkLabel.AutoSize = true;
             loginLinkLabel.BackColor = Color.Transparent;
-            loginLinkLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            loginLinkLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             loginLinkLabel.LinkColor = Color.Black;
             loginLinkLabel.Location = new Point(324, 535);
             loginLinkLabel.Name = "loginLinkLabel";
-            loginLinkLabel.Size = new Size(61, 28);
+            loginLinkLabel.Size = new Size(66, 30);
             loginLinkLabel.TabIndex = 0;
             loginLinkLabel.TabStop = true;
             loginLinkLabel.Text = "Login";
@@ -59,9 +60,10 @@
             // 
             showPasswordChkBox.AutoSize = true;
             showPasswordChkBox.BackColor = Color.Transparent;
-            showPasswordChkBox.Location = new Point(220, 418);
+            showPasswordChkBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            showPasswordChkBox.Location = new Point(218, 411);
             showPasswordChkBox.Name = "showPasswordChkBox";
-            showPasswordChkBox.Size = new Size(162, 29);
+            showPasswordChkBox.Size = new Size(172, 32);
             showPasswordChkBox.TabIndex = 1;
             showPasswordChkBox.Text = "Show Password";
             showPasswordChkBox.UseVisualStyleBackColor = false;
@@ -96,46 +98,50 @@
             label2.Size = new Size(156, 25);
             label2.TabIndex = 4;
             label2.Text = "Confirm Password";
-            label2.Click += label2_Click;
             // 
             // register_Username
             // 
-            register_Username.BackColor = Color.LightSalmon;
-            register_Username.Location = new Point(84, 176);
+            register_Username.BackColor = Color.Bisque;
+            register_Username.BorderStyle = BorderStyle.None;
+            register_Username.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            register_Username.ForeColor = Color.Black;
+            register_Username.Location = new Point(106, 177);
             register_Username.Name = "register_Username";
-            register_Username.Size = new Size(298, 31);
-            register_Username.TabIndex = 5;
-            register_Username.Visible = false;
+            register_Username.Size = new Size(252, 27);
+            register_Username.TabIndex = 2;
             // 
             // register_Password
             // 
-            register_Password.BackColor = Color.LightSalmon;
-            register_Password.Location = new Point(84, 270);
+            register_Password.BackColor = Color.Bisque;
+            register_Password.BorderStyle = BorderStyle.None;
+            register_Password.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            register_Password.ForeColor = Color.Black;
+            register_Password.Location = new Point(106, 271);
             register_Password.Name = "register_Password";
-            register_Password.Size = new Size(298, 31);
-            register_Password.TabIndex = 6;
-            register_Password.Visible = false;
+            register_Password.Size = new Size(252, 27);
+            register_Password.TabIndex = 1;
             // 
             // register_ConfirmPassword
             // 
-            register_ConfirmPassword.BackColor = Color.LightSalmon;
-            register_ConfirmPassword.Location = new Point(84, 363);
+            register_ConfirmPassword.BackColor = Color.Bisque;
+            register_ConfirmPassword.BorderStyle = BorderStyle.None;
+            register_ConfirmPassword.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            register_ConfirmPassword.ForeColor = Color.Black;
+            register_ConfirmPassword.Location = new Point(106, 364);
             register_ConfirmPassword.Name = "register_ConfirmPassword";
-            register_ConfirmPassword.Size = new Size(298, 31);
-            register_ConfirmPassword.TabIndex = 7;
-            register_ConfirmPassword.Visible = false;
+            register_ConfirmPassword.Size = new Size(252, 27);
+            register_ConfirmPassword.TabIndex = 0;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(84, 535);
+            label3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(59, 534);
             label3.Name = "label3";
-            label3.Size = new Size(234, 28);
+            label3.Size = new Size(259, 30);
             label3.TabIndex = 8;
             label3.Text = "Already have an account?";
-            label3.Click += label3_Click;
             // 
             // close_Label
             // 
@@ -144,24 +150,38 @@
             close_Label.BorderStyle = BorderStyle.Fixed3D;
             close_Label.FlatStyle = FlatStyle.Popup;
             close_Label.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            close_Label.Location = new Point(458, 9);
+            close_Label.Location = new Point(455, 9);
             close_Label.Name = "close_Label";
             close_Label.Size = new Size(26, 27);
             close_Label.TabIndex = 9;
             close_Label.Text = "X";
             close_Label.Click += close_Click;
             // 
+            // registerBtn
+            // 
+            registerBtn.BackColor = Color.Transparent;
+            registerBtn.FlatAppearance.BorderSize = 0;
+            registerBtn.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            registerBtn.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            registerBtn.FlatStyle = FlatStyle.Flat;
+            registerBtn.Location = new Point(133, 458);
+            registerBtn.Name = "registerBtn";
+            registerBtn.Size = new Size(189, 36);
+            registerBtn.TabIndex = 10;
+            registerBtn.UseVisualStyleBackColor = false;
+            registerBtn.Click += registerBtn_Click;
+            // 
             // RegistrationPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(493, 662);
-            Controls.Add(close_Label);
-            Controls.Add(label3);
+            ClientSize = new Size(486, 625);
             Controls.Add(register_ConfirmPassword);
             Controls.Add(register_Password);
             Controls.Add(register_Username);
+            Controls.Add(registerBtn);
+            Controls.Add(close_Label);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(usernameLabel);
@@ -187,5 +207,6 @@
         private TextBox register_ConfirmPassword;
         private Label label3;
         private Label close_Label;
+        private Button registerBtn;
     }
 }
