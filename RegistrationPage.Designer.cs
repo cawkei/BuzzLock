@@ -51,11 +51,7 @@
             loginLinkLabel.Location = new Point(335, 515);
             loginLinkLabel.Margin = new Padding(2, 0, 2, 0);
             loginLinkLabel.Name = "loginLinkLabel";
-<<<<<<< HEAD
-            loginLinkLabel.Size = new Size(52, 23);
-=======
-            loginLinkLabel.Size = new Size(66, 30);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            loginLinkLabel.Size = new Size(66, 30); // Remote Size (larger)
             loginLinkLabel.TabIndex = 0;
             loginLinkLabel.TabStop = true;
             loginLinkLabel.Text = "Login";
@@ -65,17 +61,11 @@
             // 
             showPasswordChkBox.AutoSize = true;
             showPasswordChkBox.BackColor = Color.Transparent;
-<<<<<<< HEAD
-            showPasswordChkBox.Location = new Point(255, 416);
-            showPasswordChkBox.Margin = new Padding(2, 2, 2, 2);
+            showPasswordChkBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            showPasswordChkBox.Location = new Point(218, 411); // Remote Location
+            showPasswordChkBox.Margin = new Padding(2, 2, 2, 2); // Local Margin
             showPasswordChkBox.Name = "showPasswordChkBox";
-            showPasswordChkBox.Size = new Size(132, 24);
-=======
-            showPasswordChkBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            showPasswordChkBox.Location = new Point(218, 411);
-            showPasswordChkBox.Name = "showPasswordChkBox";
-            showPasswordChkBox.Size = new Size(172, 32);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            showPasswordChkBox.Size = new Size(172, 32); // Remote Size
             showPasswordChkBox.TabIndex = 1;
             showPasswordChkBox.Text = "Show Password";
             showPasswordChkBox.UseVisualStyleBackColor = false;
@@ -116,84 +106,53 @@
             // 
             // register_Username
             // 
-<<<<<<< HEAD
-            register_Username.BackColor = Color.LightSalmon;
-            register_Username.Location = new Point(93, 178);
-            register_Username.Margin = new Padding(2, 2, 2, 2);
+            register_Username.BackColor = Color.Bisque; // Remote BackColor
+            register_Username.BorderStyle = BorderStyle.None; // Remote BorderStyle
+            register_Username.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            register_Username.ForeColor = Color.Black; // Remote ForeColor
+            register_Username.Location = new Point(106, 177); // Remote Location
+            register_Username.Margin = new Padding(2, 2, 2, 2); // Local Margin
             register_Username.Name = "register_Username";
-            register_Username.Size = new Size(279, 27);
-            register_Username.TabIndex = 5;
-            register_Username.Visible = false;
-            register_Username.TextChanged += register_Username_TextChanged;
+            register_Username.Size = new Size(252, 27); // Remote Size
+            register_Username.TabIndex = 5; // Used local TabIndex (since remote's was 2)
+            register_Username.Visible = false; // Local Visibility
+            register_Username.TextChanged += register_Username_TextChanged; // Local Event Handler
             // 
             // register_Password
             // 
-            register_Password.BackColor = Color.LightSalmon;
-            register_Password.Location = new Point(93, 272);
-            register_Password.Margin = new Padding(2, 2, 2, 2);
+            register_Password.BackColor = Color.Bisque; // Remote BackColor
+            register_Password.BorderStyle = BorderStyle.None; // Remote BorderStyle
+            register_Password.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            register_Password.ForeColor = Color.Black; // Remote ForeColor
+            register_Password.Location = new Point(106, 271); // Remote Location
+            register_Password.Margin = new Padding(2, 2, 2, 2); // Local Margin
             register_Password.Name = "register_Password";
-            register_Password.Size = new Size(279, 27);
-            register_Password.TabIndex = 6;
-            register_Password.Visible = false;
+            register_Password.Size = new Size(252, 27); // Remote Size
+            register_Password.TabIndex = 6; // Used local TabIndex (since remote's was 1)
+            register_Password.Visible = false; // Local Visibility
             // 
             // register_ConfirmPassword
             // 
-            register_ConfirmPassword.BackColor = Color.LightSalmon;
-            register_ConfirmPassword.Location = new Point(93, 362);
-            register_ConfirmPassword.Margin = new Padding(2, 2, 2, 2);
+            register_ConfirmPassword.BackColor = Color.Bisque; // Remote BackColor
+            register_ConfirmPassword.BorderStyle = BorderStyle.None; // Remote BorderStyle
+            register_ConfirmPassword.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            register_ConfirmPassword.ForeColor = Color.Black; // Remote ForeColor
+            register_ConfirmPassword.Location = new Point(106, 364); // Remote Location
+            register_ConfirmPassword.Margin = new Padding(2, 2, 2, 2); // Local Margin
             register_ConfirmPassword.Name = "register_ConfirmPassword";
-            register_ConfirmPassword.Size = new Size(279, 27);
-            register_ConfirmPassword.TabIndex = 7;
-            register_ConfirmPassword.Visible = false;
-=======
-            register_Username.BackColor = Color.Bisque;
-            register_Username.BorderStyle = BorderStyle.None;
-            register_Username.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            register_Username.ForeColor = Color.Black;
-            register_Username.Location = new Point(106, 177);
-            register_Username.Name = "register_Username";
-            register_Username.Size = new Size(252, 27);
-            register_Username.TabIndex = 2;
-            // 
-            // register_Password
-            // 
-            register_Password.BackColor = Color.Bisque;
-            register_Password.BorderStyle = BorderStyle.None;
-            register_Password.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            register_Password.ForeColor = Color.Black;
-            register_Password.Location = new Point(106, 271);
-            register_Password.Name = "register_Password";
-            register_Password.Size = new Size(252, 27);
-            register_Password.TabIndex = 1;
-            // 
-            // register_ConfirmPassword
-            // 
-            register_ConfirmPassword.BackColor = Color.Bisque;
-            register_ConfirmPassword.BorderStyle = BorderStyle.None;
-            register_ConfirmPassword.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            register_ConfirmPassword.ForeColor = Color.Black;
-            register_ConfirmPassword.Location = new Point(106, 364);
-            register_ConfirmPassword.Name = "register_ConfirmPassword";
-            register_ConfirmPassword.Size = new Size(252, 27);
-            register_ConfirmPassword.TabIndex = 0;
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            register_ConfirmPassword.Size = new Size(252, 27); // Remote Size
+            register_ConfirmPassword.TabIndex = 7; // Used local TabIndex (since remote's was 0)
+            register_ConfirmPassword.Visible = false; // Local Visibility
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-<<<<<<< HEAD
-            label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(93, 515);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            label3.Location = new Point(59, 534); // Remote Location
+            label3.Margin = new Padding(2, 0, 2, 0); // Local Margin
             label3.Name = "label3";
-            label3.Size = new Size(206, 23);
-=======
-            label3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(59, 534);
-            label3.Name = "label3";
-            label3.Size = new Size(259, 30);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            label3.Size = new Size(259, 30); // Remote Size
             label3.TabIndex = 8;
             label3.Text = "Already have an account?";
             // 
@@ -204,12 +163,8 @@
             close_Label.BorderStyle = BorderStyle.Fixed3D;
             close_Label.FlatStyle = FlatStyle.Popup;
             close_Label.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-<<<<<<< HEAD
-            close_Label.Location = new Point(444, 23);
-            close_Label.Margin = new Padding(2, 0, 2, 0);
-=======
-            close_Label.Location = new Point(455, 9);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            close_Label.Location = new Point(455, 9); // Remote Location
+            close_Label.Margin = new Padding(2, 0, 2, 0); // Local Margin
             close_Label.Name = "close_Label";
             close_Label.Size = new Size(21, 22);
             close_Label.TabIndex = 9;
@@ -232,18 +187,10 @@
             // 
             // RegistrationPage
             // 
-<<<<<<< HEAD
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(8F, 20F); // Kept Local Dimension
+            AutoScaleMode = AutoScaleMode.None; // Remote AutoScaleMode
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(486, 667);
-            Controls.Add(close_Label);
-            Controls.Add(label3);
-=======
-            AutoScaleMode = AutoScaleMode.None;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(486, 625);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            ClientSize = new Size(486, 625); // Remote ClientSize
             Controls.Add(register_ConfirmPassword);
             Controls.Add(register_Password);
             Controls.Add(register_Username);

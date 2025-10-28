@@ -1,5 +1,4 @@
-﻿
-namespace BuzzLock1._0
+﻿namespace BuzzLock1._0
 {
     partial class StartPage
     {
@@ -77,39 +76,25 @@ namespace BuzzLock1._0
             // usernametxt
             // 
             usernametxt.BackColor = Color.Honeydew;
-<<<<<<< HEAD
-            usernametxt.Location = new Point(660, 231);
-            usernametxt.Margin = new Padding(2, 2, 2, 2);
+            usernametxt.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            usernametxt.ForeColor = SystemColors.WindowText; // Remote ForeColor
+            usernametxt.Location = new Point(643, 231); // Remote Location
+            usernametxt.Margin = new Padding(2, 2, 2, 2); // Local Margin
             usernametxt.Name = "usernametxt";
             usernametxt.PlaceholderText = "Username";
-            usernametxt.Size = new Size(238, 27);
-=======
-            usernametxt.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            usernametxt.ForeColor = SystemColors.WindowText;
-            usernametxt.Location = new Point(643, 231);
-            usernametxt.Name = "usernametxt";
-            usernametxt.PlaceholderText = "Username";
-            usernametxt.Size = new Size(296, 34);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            usernametxt.Size = new Size(296, 34); // Remote Size (larger)
             usernametxt.TabIndex = 2;
             usernametxt.TextChanged += usernametxt_TextChanged;
             // 
             // passwordtxt
             // 
             passwordtxt.BackColor = Color.Honeydew;
-<<<<<<< HEAD
-            passwordtxt.Location = new Point(660, 371);
-            passwordtxt.Margin = new Padding(2, 2, 2, 2);
+            passwordtxt.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            passwordtxt.Location = new Point(643, 370); // Remote Location
+            passwordtxt.Margin = new Padding(2, 2, 2, 2); // Local Margin
             passwordtxt.Name = "passwordtxt";
             passwordtxt.PlaceholderText = "Password";
-            passwordtxt.Size = new Size(238, 27);
-=======
-            passwordtxt.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passwordtxt.Location = new Point(643, 370);
-            passwordtxt.Name = "passwordtxt";
-            passwordtxt.PlaceholderText = "Password";
-            passwordtxt.Size = new Size(296, 34);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            passwordtxt.Size = new Size(296, 34); // Remote Size (larger)
             passwordtxt.TabIndex = 3;
             passwordtxt.TextChanged += passwordtxt_TextChanged;
             // 
@@ -117,18 +102,12 @@ namespace BuzzLock1._0
             // 
             showPW_chkbox.AutoSize = true;
             showPW_chkbox.BackColor = Color.Transparent;
-<<<<<<< HEAD
-            showPW_chkbox.Location = new Point(863, 446);
-            showPW_chkbox.Margin = new Padding(2, 2, 2, 2);
+            showPW_chkbox.Cursor = Cursors.Hand; // Remote Cursor
+            showPW_chkbox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0); // Remote Font
+            showPW_chkbox.Location = new Point(828, 449); // Remote Location
+            showPW_chkbox.Margin = new Padding(2, 2, 2, 2); // Local Margin
             showPW_chkbox.Name = "showPW_chkbox";
-            showPW_chkbox.Size = new Size(132, 24);
-=======
-            showPW_chkbox.Cursor = Cursors.Hand;
-            showPW_chkbox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            showPW_chkbox.Location = new Point(828, 449);
-            showPW_chkbox.Name = "showPW_chkbox";
-            showPW_chkbox.Size = new Size(172, 32);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            showPW_chkbox.Size = new Size(172, 32); // Remote Size
             showPW_chkbox.TabIndex = 4;
             showPW_chkbox.Text = "Show Password";
             showPW_chkbox.UseVisualStyleBackColor = false;
@@ -140,16 +119,10 @@ namespace BuzzLock1._0
             forgotPasswordLinkLabel.BackColor = Color.Transparent;
             forgotPasswordLinkLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             forgotPasswordLinkLabel.LinkColor = Color.Black;
-<<<<<<< HEAD
-            forgotPasswordLinkLabel.Location = new Point(627, 446);
-            forgotPasswordLinkLabel.Margin = new Padding(2, 0, 2, 0);
+            forgotPasswordLinkLabel.Location = new Point(625, 453); // Remote Location
+            forgotPasswordLinkLabel.Margin = new Padding(2, 0, 2, 0); // Local Margin
             forgotPasswordLinkLabel.Name = "forgotPasswordLinkLabel";
-            forgotPasswordLinkLabel.Size = new Size(125, 20);
-=======
-            forgotPasswordLinkLabel.Location = new Point(625, 453);
-            forgotPasswordLinkLabel.Name = "forgotPasswordLinkLabel";
-            forgotPasswordLinkLabel.Size = new Size(167, 28);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            forgotPasswordLinkLabel.Size = new Size(167, 28); // Remote Size
             forgotPasswordLinkLabel.TabIndex = 7;
             forgotPasswordLinkLabel.TabStop = true;
             forgotPasswordLinkLabel.Text = "Forgot Password?";
@@ -172,16 +145,10 @@ namespace BuzzLock1._0
             // 
             // StartPage
             // 
-<<<<<<< HEAD
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(8F, 20F); // Kept Local Dimension
+            AutoScaleMode = AutoScaleMode.None; // Remote AutoScaleMode
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1190, 670);
-=======
-            AutoScaleMode = AutoScaleMode.None;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1176, 654);
->>>>>>> 03a76f27085b3305f436199521b105873c0427e7
+            ClientSize = new Size(1176, 654); // Remote ClientSize (slightly smaller)
             Controls.Add(close_Label);
             Controls.Add(forgotPasswordLinkLabel);
             Controls.Add(showPW_chkbox);
