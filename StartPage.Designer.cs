@@ -35,7 +35,6 @@ namespace BuzzLock1._0
             usernametxt = new TextBox();
             passwordtxt = new TextBox();
             showPW_chkbox = new CheckBox();
-            label1 = new Label();
             forgotPasswordLinkLabel = new LinkLabel();
             close_Label = new Label();
             SuspendLayout();
@@ -50,9 +49,10 @@ namespace BuzzLock1._0
             register_BTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             register_BTN.FlatStyle = FlatStyle.Flat;
             register_BTN.ForeColor = Color.Transparent;
-            register_BTN.Location = new Point(118, 549);
+            register_BTN.Location = new Point(139, 554);
+            register_BTN.Margin = new Padding(2, 2, 2, 2);
             register_BTN.Name = "register_BTN";
-            register_BTN.Size = new Size(209, 45);
+            register_BTN.Size = new Size(167, 36);
             register_BTN.TabIndex = 0;
             register_BTN.UseMnemonic = false;
             register_BTN.UseVisualStyleBackColor = false;
@@ -65,9 +65,10 @@ namespace BuzzLock1._0
             login_BTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
             login_BTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             login_BTN.FlatStyle = FlatStyle.Flat;
-            login_BTN.Location = new Point(695, 520);
+            login_BTN.Location = new Point(715, 527);
+            login_BTN.Margin = new Padding(2, 2, 2, 2);
             login_BTN.Name = "login_BTN";
-            login_BTN.Size = new Size(211, 53);
+            login_BTN.Size = new Size(169, 42);
             login_BTN.TabIndex = 1;
             login_BTN.UseVisualStyleBackColor = false;
             login_BTN.Click += login_BTN_Click;
@@ -75,52 +76,46 @@ namespace BuzzLock1._0
             // usernametxt
             // 
             usernametxt.BackColor = Color.Honeydew;
-            usernametxt.Location = new Point(643, 234);
+            usernametxt.Location = new Point(660, 231);
+            usernametxt.Margin = new Padding(2, 2, 2, 2);
             usernametxt.Name = "usernametxt";
             usernametxt.PlaceholderText = "Username";
-            usernametxt.Size = new Size(296, 31);
+            usernametxt.Size = new Size(238, 27);
             usernametxt.TabIndex = 2;
             usernametxt.TextChanged += usernametxt_TextChanged;
             // 
             // passwordtxt
             // 
             passwordtxt.BackColor = Color.Honeydew;
-            passwordtxt.Location = new Point(643, 367);
+            passwordtxt.Location = new Point(660, 371);
+            passwordtxt.Margin = new Padding(2, 2, 2, 2);
             passwordtxt.Name = "passwordtxt";
             passwordtxt.PlaceholderText = "Password";
-            passwordtxt.Size = new Size(296, 31);
+            passwordtxt.Size = new Size(238, 27);
             passwordtxt.TabIndex = 3;
             // 
             // showPW_chkbox
             // 
             showPW_chkbox.AutoSize = true;
             showPW_chkbox.BackColor = Color.Transparent;
-            showPW_chkbox.Location = new Point(634, 452);
+            showPW_chkbox.Location = new Point(863, 446);
+            showPW_chkbox.Margin = new Padding(2, 2, 2, 2);
             showPW_chkbox.Name = "showPW_chkbox";
-            showPW_chkbox.Size = new Size(162, 29);
+            showPW_chkbox.Size = new Size(132, 24);
             showPW_chkbox.TabIndex = 4;
             showPW_chkbox.Text = "Show Password";
             showPW_chkbox.UseVisualStyleBackColor = false;
             showPW_chkbox.CheckedChanged += show_Password;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Location = new Point(634, 308);
-            label1.Name = "label1";
-            label1.Size = new Size(87, 25);
-            label1.TabIndex = 6;
-            label1.Text = "Password";
             // 
             // forgotPasswordLinkLabel
             // 
             forgotPasswordLinkLabel.AutoSize = true;
             forgotPasswordLinkLabel.BackColor = Color.Transparent;
             forgotPasswordLinkLabel.LinkColor = Color.Black;
-            forgotPasswordLinkLabel.Location = new Point(842, 452);
+            forgotPasswordLinkLabel.Location = new Point(627, 446);
+            forgotPasswordLinkLabel.Margin = new Padding(2, 0, 2, 0);
             forgotPasswordLinkLabel.Name = "forgotPasswordLinkLabel";
-            forgotPasswordLinkLabel.Size = new Size(154, 25);
+            forgotPasswordLinkLabel.Size = new Size(125, 20);
             forgotPasswordLinkLabel.TabIndex = 7;
             forgotPasswordLinkLabel.TabStop = true;
             forgotPasswordLinkLabel.Text = "Forgot Password?";
@@ -131,9 +126,10 @@ namespace BuzzLock1._0
             close_Label.BackColor = Color.Transparent;
             close_Label.BorderStyle = BorderStyle.Fixed3D;
             close_Label.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            close_Label.Location = new Point(1148, 9);
+            close_Label.Location = new Point(1138, 22);
+            close_Label.Margin = new Padding(2, 0, 2, 0);
             close_Label.Name = "close_Label";
-            close_Label.Size = new Size(21, 33);
+            close_Label.Size = new Size(18, 28);
             close_Label.TabIndex = 8;
             close_Label.Text = "X";
             close_Label.UseCompatibleTextRendering = true;
@@ -141,19 +137,19 @@ namespace BuzzLock1._0
             // 
             // StartPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1183, 672);
+            ClientSize = new Size(1190, 670);
             Controls.Add(close_Label);
             Controls.Add(forgotPasswordLinkLabel);
-            Controls.Add(label1);
             Controls.Add(showPW_chkbox);
             Controls.Add(passwordtxt);
             Controls.Add(usernametxt);
             Controls.Add(login_BTN);
             Controls.Add(register_BTN);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "StartPage";
             StartPosition = FormStartPosition.CenterScreen;
             Load += Form1_Load;
@@ -174,7 +170,6 @@ namespace BuzzLock1._0
         private TextBox usernametxt;
         private TextBox passwordtxt;
         private CheckBox showPW_chkbox;
-        private Label label1;
         private LinkLabel forgotPasswordLinkLabel;
         private Label close_Label;
     }

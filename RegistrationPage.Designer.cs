@@ -47,9 +47,10 @@
             loginLinkLabel.BackColor = Color.Transparent;
             loginLinkLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             loginLinkLabel.LinkColor = Color.Black;
-            loginLinkLabel.Location = new Point(324, 535);
+            loginLinkLabel.Location = new Point(335, 515);
+            loginLinkLabel.Margin = new Padding(2, 0, 2, 0);
             loginLinkLabel.Name = "loginLinkLabel";
-            loginLinkLabel.Size = new Size(61, 28);
+            loginLinkLabel.Size = new Size(52, 23);
             loginLinkLabel.TabIndex = 0;
             loginLinkLabel.TabStop = true;
             loginLinkLabel.Text = "Login";
@@ -59,9 +60,10 @@
             // 
             showPasswordChkBox.AutoSize = true;
             showPasswordChkBox.BackColor = Color.Transparent;
-            showPasswordChkBox.Location = new Point(220, 418);
+            showPasswordChkBox.Location = new Point(255, 416);
+            showPasswordChkBox.Margin = new Padding(2, 2, 2, 2);
             showPasswordChkBox.Name = "showPasswordChkBox";
-            showPasswordChkBox.Size = new Size(162, 29);
+            showPasswordChkBox.Size = new Size(132, 24);
             showPasswordChkBox.TabIndex = 1;
             showPasswordChkBox.Text = "Show Password";
             showPasswordChkBox.UseVisualStyleBackColor = false;
@@ -71,9 +73,10 @@
             // 
             usernameLabel.AutoSize = true;
             usernameLabel.BackColor = Color.Transparent;
-            usernameLabel.Location = new Point(84, 136);
+            usernameLabel.Location = new Point(84, 138);
+            usernameLabel.Margin = new Padding(2, 0, 2, 0);
             usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(91, 25);
+            usernameLabel.Size = new Size(75, 20);
             usernameLabel.TabIndex = 2;
             usernameLabel.Text = "Username";
             // 
@@ -81,9 +84,10 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Location = new Point(84, 228);
+            label1.Location = new Point(84, 234);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(87, 25);
+            label1.Size = new Size(70, 20);
             label1.TabIndex = 3;
             label1.Text = "Password";
             // 
@@ -91,9 +95,10 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Location = new Point(84, 325);
+            label2.Location = new Point(84, 327);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(156, 25);
+            label2.Size = new Size(127, 20);
             label2.TabIndex = 4;
             label2.Text = "Confirm Password";
             label2.Click += label2_Click;
@@ -101,27 +106,31 @@
             // register_Username
             // 
             register_Username.BackColor = Color.LightSalmon;
-            register_Username.Location = new Point(84, 176);
+            register_Username.Location = new Point(93, 178);
+            register_Username.Margin = new Padding(2, 2, 2, 2);
             register_Username.Name = "register_Username";
-            register_Username.Size = new Size(298, 31);
+            register_Username.Size = new Size(279, 27);
             register_Username.TabIndex = 5;
             register_Username.Visible = false;
+            register_Username.TextChanged += register_Username_TextChanged;
             // 
             // register_Password
             // 
             register_Password.BackColor = Color.LightSalmon;
-            register_Password.Location = new Point(84, 270);
+            register_Password.Location = new Point(93, 272);
+            register_Password.Margin = new Padding(2, 2, 2, 2);
             register_Password.Name = "register_Password";
-            register_Password.Size = new Size(298, 31);
+            register_Password.Size = new Size(279, 27);
             register_Password.TabIndex = 6;
             register_Password.Visible = false;
             // 
             // register_ConfirmPassword
             // 
             register_ConfirmPassword.BackColor = Color.LightSalmon;
-            register_ConfirmPassword.Location = new Point(84, 363);
+            register_ConfirmPassword.Location = new Point(93, 362);
+            register_ConfirmPassword.Margin = new Padding(2, 2, 2, 2);
             register_ConfirmPassword.Name = "register_ConfirmPassword";
-            register_ConfirmPassword.Size = new Size(298, 31);
+            register_ConfirmPassword.Size = new Size(279, 27);
             register_ConfirmPassword.TabIndex = 7;
             register_ConfirmPassword.Visible = false;
             // 
@@ -130,9 +139,10 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(84, 535);
+            label3.Location = new Point(93, 515);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(234, 28);
+            label3.Size = new Size(206, 23);
             label3.TabIndex = 8;
             label3.Text = "Already have an account?";
             label3.Click += label3_Click;
@@ -144,19 +154,20 @@
             close_Label.BorderStyle = BorderStyle.Fixed3D;
             close_Label.FlatStyle = FlatStyle.Popup;
             close_Label.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            close_Label.Location = new Point(458, 9);
+            close_Label.Location = new Point(444, 23);
+            close_Label.Margin = new Padding(2, 0, 2, 0);
             close_Label.Name = "close_Label";
-            close_Label.Size = new Size(26, 27);
+            close_Label.Size = new Size(21, 22);
             close_Label.TabIndex = 9;
             close_Label.Text = "X";
             close_Label.Click += close_Click;
             // 
             // RegistrationPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(493, 662);
+            ClientSize = new Size(486, 667);
             Controls.Add(close_Label);
             Controls.Add(label3);
             Controls.Add(register_ConfirmPassword);
@@ -168,6 +179,7 @@
             Controls.Add(showPasswordChkBox);
             Controls.Add(loginLinkLabel);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "RegistrationPage";
             StartPosition = FormStartPosition.CenterScreen;
             Load += RegistrationPage_Load;

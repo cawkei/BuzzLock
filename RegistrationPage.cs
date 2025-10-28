@@ -48,5 +48,10 @@ namespace BuzzLock1._0.View
         {
             this.Close();
         }
+
+        private void register_Username_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,11 +1,19 @@
 ﻿using System;
+
 using System.Data;
+
 using System.Drawing;
+
 using System.Windows.Forms;
+
 using Microsoft.Data.Sqlite;
 
+
+
 namespace BuzzLock
+
 {
+
     public partial class VaultForm : Form
     {
         private DataGridView vaultGrid;
@@ -13,13 +21,16 @@ namespace BuzzLock
         private TextBox txtSearch;
 
         public VaultForm()
+
         {
             InitializeComponent();
             Database.Initialize();
             LoadVaultData();
+
         }
 
         private void InitializeComponent()
+
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -35,7 +46,7 @@ namespace BuzzLock
             // vaultGrid
             // 
             vaultGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            vaultGrid.BackgroundColor = Color.FromArgb(255, 237, 164);
+            vaultGrid.BackgroundColor = Color.FromArgb(255, 222, 89);
             vaultGrid.BorderStyle = BorderStyle.None;
             vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -56,7 +67,7 @@ namespace BuzzLock
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             vaultGrid.DefaultCellStyle = dataGridViewCellStyle2;
             vaultGrid.GridColor = Color.FromArgb(255, 128, 0);
-            vaultGrid.Location = new Point(46, 109);
+            vaultGrid.Location = new Point(49, 116);
             vaultGrid.Name = "vaultGrid";
             vaultGrid.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -69,16 +80,15 @@ namespace BuzzLock
             vaultGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             vaultGrid.RowHeadersWidth = 60;
             vaultGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            vaultGrid.Size = new Size(781, 335);
+            vaultGrid.Size = new Size(702, 335);
             vaultGrid.TabIndex = 0;
             vaultGrid.CellContentClick += vaultGrid_CellContentClick;
             vaultGrid.CellDoubleClick += VaultGrid_CellDoubleClick;
             // 
             // btnAdd
             // 
-            btnAdd.BackgroundImage = (Image)resources.GetObject("btnAdd.BackgroundImage");
             btnAdd.BackgroundImageLayout = ImageLayout.Center;
-            btnAdd.Location = new Point(73, 380);
+            btnAdd.Location = new Point(776, 313);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(53, 47);
             btnAdd.TabIndex = 1;
@@ -86,9 +96,8 @@ namespace BuzzLock
             // 
             // btnGenerator
             // 
-            btnGenerator.BackgroundImage = (Image)resources.GetObject("btnGenerator.BackgroundImage");
             btnGenerator.BackgroundImageLayout = ImageLayout.Center;
-            btnGenerator.Location = new Point(144, 380);
+            btnGenerator.Location = new Point(776, 249);
             btnGenerator.Name = "btnGenerator";
             btnGenerator.Size = new Size(53, 47);
             btnGenerator.TabIndex = 2;
@@ -98,7 +107,7 @@ namespace BuzzLock
             // 
             txtSearch.BackColor = Color.FromArgb(166, 231, 138);
             txtSearch.BorderStyle = BorderStyle.None;
-            txtSearch.Location = new Point(394, 50);
+            txtSearch.Location = new Point(354, 73);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(423, 20);
             txtSearch.TabIndex = 4;
@@ -129,11 +138,10 @@ namespace BuzzLock
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    LoadVaultData(); 
+                    LoadVaultData();
                 }
             }
         }
-
         private void BtnGenerator_Click(object sender, EventArgs e)
         {
             GeneratorForm1 generator = new GeneratorForm1();
@@ -183,14 +191,13 @@ namespace BuzzLock
             }
         }
 
-
-
         private void VaultGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 int id = Convert.ToInt32(vaultGrid.Rows[e.RowIndex].Cells["Id"].Value);
                 using (var viewForm = new ViewAccountForm(id))
+
                 {
                     if (viewForm.ShowDialog() == DialogResult.OK)
                     {
@@ -201,8 +208,12 @@ namespace BuzzLock
         }
 
         private void vaultGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
         {
+
+
 
         }
     }
 }
+
