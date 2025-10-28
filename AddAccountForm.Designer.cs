@@ -37,17 +37,18 @@
             btnSave = new Button();
             btnCancel = new Button();
             btnShowHide = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // txtAccount
             // 
             txtAccount.BackColor = SystemColors.Info;
             txtAccount.BorderStyle = BorderStyle.None;
-            txtAccount.Font = new Font("Bahnschrift Condensed", 13.8F);
+            txtAccount.Font = new Font("Bahnschrift Condensed", 16.2F);
             txtAccount.ForeColor = Color.Black;
-            txtAccount.Location = new Point(237, 200);
+            txtAccount.Location = new Point(258, 217);
             txtAccount.Name = "txtAccount";
-            txtAccount.Size = new Size(518, 28);
+            txtAccount.Size = new Size(560, 33);
             txtAccount.TabIndex = 1;
             txtAccount.TextChanged += txtAccount_TextChanged;
             // 
@@ -55,10 +56,10 @@
             // 
             txtUsername.BackColor = SystemColors.Info;
             txtUsername.BorderStyle = BorderStyle.None;
-            txtUsername.Font = new Font("Bahnschrift Condensed", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsername.Location = new Point(237, 139);
+            txtUsername.Font = new Font("Bahnschrift Condensed", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsername.Location = new Point(258, 156);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(518, 28);
+            txtUsername.Size = new Size(560, 33);
             txtUsername.TabIndex = 3;
             txtUsername.TextChanged += txtUsername_TextChanged;
             // 
@@ -66,11 +67,11 @@
             // 
             txtPassword.BackColor = SystemColors.Info;
             txtPassword.BorderStyle = BorderStyle.None;
-            txtPassword.Font = new Font("Bahnschrift Condensed", 13.8F);
-            txtPassword.Location = new Point(237, 263);
+            txtPassword.Font = new Font("Bahnschrift Condensed", 16.2F);
+            txtPassword.Location = new Point(258, 294);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(441, 28);
+            txtPassword.Size = new Size(483, 33);
             txtPassword.TabIndex = 5;
             txtPassword.TextChanged += txtPassword_TextChanged;
             // 
@@ -79,10 +80,11 @@
             cmbAlgorithm.BackColor = SystemColors.Info;
             cmbAlgorithm.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbAlgorithm.Font = new Font("Bahnschrift Condensed", 13.8F);
+            cmbAlgorithm.ForeColor = SystemColors.ActiveBorder;
             cmbAlgorithm.Items.AddRange(new object[] { "Argon2", "Scrypt" });
-            cmbAlgorithm.Location = new Point(237, 325);
+            cmbAlgorithm.Location = new Point(258, 357);
             cmbAlgorithm.Name = "cmbAlgorithm";
-            cmbAlgorithm.Size = new Size(518, 36);
+            cmbAlgorithm.Size = new Size(560, 36);
             cmbAlgorithm.TabIndex = 8;
             // 
             // btnSave
@@ -90,7 +92,7 @@
             btnSave.BackColor = Color.Transparent;
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.ForeColor = Color.Transparent;
-            btnSave.Location = new Point(443, 383);
+            btnSave.Location = new Point(507, 421);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(154, 46);
             btnSave.TabIndex = 9;
@@ -103,7 +105,7 @@
             btnCancel.BackgroundImageLayout = ImageLayout.Center;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Transparent;
-            btnCancel.Location = new Point(618, 383);
+            btnCancel.Location = new Point(685, 421);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(160, 46);
             btnCancel.TabIndex = 10;
@@ -116,18 +118,31 @@
             btnShowHide.BackgroundImageLayout = ImageLayout.Center;
             btnShowHide.FlatStyle = FlatStyle.Flat;
             btnShowHide.ForeColor = Color.Transparent;
-            btnShowHide.Location = new Point(684, 263);
+            btnShowHide.Location = new Point(755, 290);
             btnShowHide.Name = "btnShowHide";
             btnShowHide.Size = new Size(63, 37);
             btnShowHide.TabIndex = 6;
             btnShowHide.UseVisualStyleBackColor = false;
             btnShowHide.Click += BtnShowHide_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.Transparent;
+            button1.Location = new Point(327, 424);
+            button1.Name = "button1";
+            button1.Size = new Size(160, 44);
+            button1.TabIndex = 11;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += BtnGenerator_Click;
+            // 
             // AddAccountForm
             // 
             BackColor = Color.FromArgb(255, 237, 164);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(835, 469);
+            ClientSize = new Size(923, 515);
+            Controls.Add(button1);
             Controls.Add(txtAccount);
             Controls.Add(txtUsername);
             Controls.Add(txtPassword);
@@ -154,5 +169,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnShowHide;
+        private Button button1;
     }
 }

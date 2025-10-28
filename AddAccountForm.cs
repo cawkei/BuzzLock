@@ -100,5 +100,11 @@ namespace BuzzLock
         {
 
         }
+
+        private void BtnGenerator_Click(object sender, EventArgs e)
+        {
+            GeneratorForm1 generator = new GeneratorForm1();
+            generator.ShowDialog();
+        }
     }
 }

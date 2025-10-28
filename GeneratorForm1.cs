@@ -38,10 +38,10 @@ namespace BuzzLock
             txtPassword.BorderStyle = BorderStyle.None;
             txtPassword.Font = new Font("Bahnschrift SemiBold Condensed", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtPassword.ForeColor = Color.Black;
-            txtPassword.Location = new Point(139, 226);
+            txtPassword.Location = new Point(101, 216);
             txtPassword.Multiline = true;
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(461, 66);
+            txtPassword.Size = new Size(518, 47);
             txtPassword.TabIndex = 9;
             txtPassword.UseSystemPasswordChar = true;
             txtPassword.TextChanged += txtPassword_TextChanged;
@@ -49,11 +49,12 @@ namespace BuzzLock
             // btnCopy
             // 
             btnCopy.BackColor = Color.Transparent;
-            btnCopy.BackgroundImage = (Image)resources.GetObject("btnCopy.BackgroundImage");
             btnCopy.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCopy.Location = new Point(731, 240);
+            btnCopy.FlatStyle = FlatStyle.Flat;
+            btnCopy.ForeColor = Color.Transparent;
+            btnCopy.Location = new Point(691, 193);
             btnCopy.Name = "btnCopy";
-            btnCopy.Size = new Size(109, 29);
+            btnCopy.Size = new Size(74, 80);
             btnCopy.TabIndex = 7;
             btnCopy.UseVisualStyleBackColor = false;
             btnCopy.Click += BtnCopy_Click;
@@ -61,10 +62,10 @@ namespace BuzzLock
             // btnGenerate
             // 
             btnGenerate.BackColor = Color.Transparent;
-            btnGenerate.BackgroundImage = (Image)resources.GetObject("btnGenerate.BackgroundImage");
             btnGenerate.BackgroundImageLayout = ImageLayout.None;
+            btnGenerate.FlatStyle = FlatStyle.Flat;
             btnGenerate.ForeColor = Color.Transparent;
-            btnGenerate.Location = new Point(606, 226);
+            btnGenerate.Location = new Point(615, 205);
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new Size(58, 58);
             btnGenerate.TabIndex = 6;
@@ -74,9 +75,9 @@ namespace BuzzLock
             // 
             // chkSpecial
             // 
-            chkSpecial.BackColor = Color.FromArgb(220, 255, 176);
+            chkSpecial.BackColor = Color.Transparent;
             chkSpecial.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkSpecial.Location = new Point(580, 325);
+            chkSpecial.Location = new Point(488, 289);
             chkSpecial.Name = "chkSpecial";
             chkSpecial.Size = new Size(108, 27);
             chkSpecial.TabIndex = 5;
@@ -86,9 +87,9 @@ namespace BuzzLock
             // 
             // chkNumbers
             // 
-            chkNumbers.BackColor = Color.FromArgb(220, 255, 176);
+            chkNumbers.BackColor = Color.Transparent;
             chkNumbers.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkNumbers.Location = new Point(435, 325);
+            chkNumbers.Location = new Point(356, 289);
             chkNumbers.Name = "chkNumbers";
             chkNumbers.Size = new Size(108, 27);
             chkNumbers.TabIndex = 4;
@@ -98,9 +99,9 @@ namespace BuzzLock
             // 
             // chkLowercase
             // 
-            chkLowercase.BackColor = Color.FromArgb(220, 255, 176);
+            chkLowercase.BackColor = Color.Transparent;
             chkLowercase.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkLowercase.Location = new Point(139, 325);
+            chkLowercase.Location = new Point(101, 289);
             chkLowercase.Name = "chkLowercase";
             chkLowercase.Size = new Size(108, 27);
             chkLowercase.TabIndex = 3;
@@ -110,9 +111,9 @@ namespace BuzzLock
             // 
             // chkUppercase
             // 
-            chkUppercase.BackColor = Color.FromArgb(220, 255, 176);
+            chkUppercase.BackColor = Color.Transparent;
             chkUppercase.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            chkUppercase.Location = new Point(284, 325);
+            chkUppercase.Location = new Point(215, 288);
             chkUppercase.Name = "chkUppercase";
             chkUppercase.Size = new Size(108, 27);
             chkUppercase.TabIndex = 2;
@@ -122,10 +123,10 @@ namespace BuzzLock
             // 
             // numericUpDownLength
             // 
-            numericUpDownLength.BackColor = Color.FromArgb(220, 255, 176);
+            numericUpDownLength.BackColor = Color.White;
             numericUpDownLength.BorderStyle = BorderStyle.None;
             numericUpDownLength.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            numericUpDownLength.Location = new Point(732, 325);
+            numericUpDownLength.Location = new Point(641, 289);
             numericUpDownLength.Maximum = new decimal(new int[] { 130, 0, 0, 0 });
             numericUpDownLength.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
             numericUpDownLength.Name = "numericUpDownLength";
@@ -136,9 +137,9 @@ namespace BuzzLock
             // 
             // GeneratorForm1
             // 
-            BackColor = Color.FromArgb(255, 192, 192);
+            BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(961, 542);
+            ClientSize = new Size(851, 481);
             Controls.Add(btnGenerate);
             Controls.Add(numericUpDownLength);
             Controls.Add(chkUppercase);

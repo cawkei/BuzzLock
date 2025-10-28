@@ -41,30 +41,30 @@
             // 
             txtAccount.BackColor = Color.FromArgb(255, 222, 89);
             txtAccount.BorderStyle = BorderStyle.None;
-            txtAccount.Font = new Font("ROG Fonts", 22.1999989F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAccount.Location = new Point(74, 158);
+            txtAccount.Font = new Font("ROG Fonts", 28.1999989F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAccount.Location = new Point(73, 152);
             txtAccount.Name = "txtAccount";
-            txtAccount.Size = new Size(200, 45);
+            txtAccount.Size = new Size(200, 57);
             txtAccount.TabIndex = 1;
             // 
             // txtUsername
             // 
             txtUsername.BackColor = Color.FromArgb(255, 222, 89);
             txtUsername.BorderStyle = BorderStyle.None;
-            txtUsername.Font = new Font("Bahnschrift Condensed", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsername.Location = new Point(252, 245);
+            txtUsername.Font = new Font("Bahnschrift Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsername.Location = new Point(252, 241);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(200, 33);
+            txtUsername.Size = new Size(509, 37);
             txtUsername.TabIndex = 3;
             // 
             // txtPassword
             // 
             txtPassword.BackColor = Color.FromArgb(255, 222, 89);
             txtPassword.BorderStyle = BorderStyle.None;
-            txtPassword.Font = new Font("Bahnschrift Condensed", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPassword.Location = new Point(252, 307);
+            txtPassword.Font = new Font("Bahnschrift Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPassword.Location = new Point(252, 305);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(200, 33);
+            txtPassword.Size = new Size(509, 37);
             txtPassword.TabIndex = 5;
             txtPassword.TextChanged += txtPassword_TextChanged;
             // 
