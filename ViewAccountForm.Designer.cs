@@ -41,10 +41,10 @@
             // 
             txtAccount.BackColor = Color.FromArgb(255, 222, 89);
             txtAccount.BorderStyle = BorderStyle.None;
-            txtAccount.Font = new Font("ROG Fonts", 28.1999989F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAccount.Location = new Point(73, 152);
+            txtAccount.Font = new Font("Microsoft Sans Serif", 28.1999989F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAccount.Location = new Point(74, 146);
             txtAccount.Name = "txtAccount";
-            txtAccount.Size = new Size(200, 57);
+            txtAccount.Size = new Size(455, 64);
             txtAccount.TabIndex = 1;
             // 
             // txtUsername
@@ -54,7 +54,7 @@
             txtUsername.Font = new Font("Bahnschrift Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtUsername.Location = new Point(252, 241);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(509, 37);
+            txtUsername.Size = new Size(509, 44);
             txtUsername.TabIndex = 3;
             // 
             // txtPassword
@@ -64,18 +64,19 @@
             txtPassword.Font = new Font("Bahnschrift Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPassword.Location = new Point(252, 305);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(509, 37);
+            txtPassword.Size = new Size(509, 44);
             txtPassword.TabIndex = 5;
-            txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // btnEdit
             // 
             btnEdit.BackColor = Color.Transparent;
+            btnEdit.BackgroundImageLayout = ImageLayout.Stretch;
+            btnEdit.FlatAppearance.BorderSize = 0;
             btnEdit.FlatStyle = FlatStyle.Flat;
             btnEdit.ForeColor = Color.Transparent;
-            btnEdit.Location = new Point(269, 371);
+            btnEdit.Location = new Point(284, 378);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(154, 48);
+            btnEdit.Size = new Size(129, 30);
             btnEdit.TabIndex = 6;
             btnEdit.UseVisualStyleBackColor = false;
             btnEdit.Click += BtnEdit_Click;
@@ -83,11 +84,13 @@
             // btnSave
             // 
             btnSave.BackColor = Color.Transparent;
+            btnSave.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.ForeColor = Color.Transparent;
-            btnSave.Location = new Point(439, 371);
+            btnSave.Location = new Point(460, 378);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(162, 48);
+            btnSave.Size = new Size(122, 30);
             btnSave.TabIndex = 7;
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += BtnSave_Click;
@@ -95,11 +98,13 @@
             // btnCancel
             // 
             btnCancel.BackColor = Color.Transparent;
+            btnCancel.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Transparent;
-            btnCancel.Location = new Point(622, 371);
+            btnCancel.Location = new Point(642, 371);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(156, 48);
+            btnCancel.Size = new Size(119, 37);
             btnCancel.TabIndex = 8;
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += BtnCancel_Click;
@@ -107,6 +112,7 @@
             // ViewAccountForm
             // 
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(836, 470);
             Controls.Add(txtAccount);
             Controls.Add(txtUsername);
@@ -114,11 +120,14 @@
             Controls.Add(btnEdit);
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "ViewAccountForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "View Account";
+            Text = "BuzzLock";
             ResumeLayout(false);
             PerformLayout();
         }

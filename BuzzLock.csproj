@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+
+	 <EnableWindowsFormsHighDpiAutoRescaling>true</EnableWindowsFormsHighDpiAutoRescaling>
+	 <Prefer32Bit>false</Prefer32Bit>
+
+
   </PropertyGroup>
 
 	<ItemGroup>

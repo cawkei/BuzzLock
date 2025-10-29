@@ -1,139 +1,159 @@
-﻿using System;
-using System.Data;
-using Microsoft.Data.Sqlite; // Using Microsoft.Data.Sqlite
+﻿using BuzzLock;
+using Microsoft.Data.Sqlite;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace BuzzLock1._0.View
 {
-    public partial class RegistrationPage : Form
+    public partial class RegistrationPage : CustomBorderForm
     {
         public RegistrationPage()
         {
             InitializeComponent();
-
-
             this.AutoScaleMode = AutoScaleMode.None;
-            this.ClientSize = new Size(493, 627);
-            this.MaximumSize = new Size(493, 627);
-            this.MinimumSize = new Size(493, 627);
-            this.StartPosition = FormStartPosition.CenterScreen; // centers the form
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void RegistrationPage_Load(object sender, EventArgs e)
         {
-            register_Password.PasswordChar = '•';
-            register_ConfirmPassword.PasswordChar = '•';
-            register_Username.UseSystemPasswordChar = false;
-            register_Username.PasswordChar = '\0';
+            registerBtn.FlatStyle = FlatStyle.Flat;
+            registerBtn.FlatAppearance.BorderSize = 0;
+            registerBtn.FlatAppearance.BorderColor = this.BackColor;
+            registerBtn.UseVisualStyleBackColor = false;
+            registerBtn.TabStop = false;
 
 
+            // Enter key triggers register button
+            this.AcceptButton = registerBtn;
+
+            // Tab order
+            register_Username.TabIndex = 0;
+            register_Password.TabIndex = 1;
+            register_ConfirmPassword.TabIndex = 2;
+            registerBtn.TabIndex = 3;
+            loginLinkLabel.TabIndex = 4;
+            showPW_chkbox.TabIndex = 5;
+
+            // Password masking
+            register_Password.UseSystemPasswordChar = true;
+            register_ConfirmPassword.UseSystemPasswordChar = true;
         }
 
-        // 🔹 Register button click
         private void registerBtn_Click(object sender, EventArgs e)
         {
             string username = register_Username.Text.Trim();
             string password = register_Password.Text.Trim();
             string confirmPassword = register_ConfirmPassword.Text.Trim();
 
-            // Check for empty fields
+            // Basic validation
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
             {
-                MessageBox.Show("Please fill in all fields.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CustomMessageBox.Show("Please fill in all fields.", "Warning");
                 return;
             }
 
-            // Check if passwords match
             if (password != confirmPassword)
             {
-                MessageBox.Show("Passwords do not match. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Show("Passwords do not match.", "Error");
                 return;
             }
 
-            try
-            {
-                using (var conn = new SqliteConnection("Data Source=BuzzLock.db"))
-                {
-                    conn.Open();
+            // Retry parameters
+            int retryCount = 5;
+            int delay = 300; // milliseconds
+            bool success = false;
 
-                    // Check if Users table exists; create if not
-                    string createTable = @"
+            while (!success && retryCount > 0)
+            {
+                try
+                {
+                    using (var conn = new SqliteConnection("Data Source=BuzzLock.db;Cache=Shared;Mode=ReadWriteCreate"))
+                    {
+                        conn.Open();
+
+                        // Busy timeout to wait if database is locked
+                        using (var pragmaCmd = conn.CreateCommand())
+                        {
+                            pragmaCmd.CommandText = "PRAGMA busy_timeout = 5000;";
+                            pragmaCmd.ExecuteNonQuery();
+                        }
+
+                        // Create Users table if it doesn't exist
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = @"
                         CREATE TABLE IF NOT EXISTS Users (
                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
                             Username TEXT NOT NULL UNIQUE,
                             Password TEXT NOT NULL
-                        );
-                    ";
-                    using (var cmd = new SqliteCommand(createTable, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                        );";
+                            cmd.ExecuteNonQuery();
+                        }
 
-                    // Check if username already exists
-                    string checkUserQuery = "SELECT COUNT(*) FROM Users WHERE Username = @Username;";
-                    using (var checkCmd = new SqliteCommand(checkUserQuery, conn))
-                    {
-                        checkCmd.Parameters.AddWithValue("@Username", username);
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-                        long count = (long)checkCmd.ExecuteScalar();
-#pragma warning restore CS8605 // Unboxing a possibly null value.
-
-                        if (count > 0)
+                        // Check if username already exists
+                        using (var cmd = conn.CreateCommand())
                         {
-                            MessageBox.Show("Username already exists. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username;";
+                            cmd.Parameters.AddWithValue("@Username", username);
+                            long count = (long)cmd.ExecuteScalar();
+                            if (count > 0)
+                            {
+                                CustomMessageBox.Show("Username already exists.", "Error");
+                                return;
+                            }
+                        }
+
+                        // Insert new user with hashed password
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password);";
+                            cmd.Parameters.AddWithValue("@Username", username);
+                            cmd.Parameters.AddWithValue("@Password", PasswordHasher.HashWithArgon2(password));
+                            cmd.ExecuteNonQuery();
                         }
                     }
 
-                    // Insert new user
-                    string insertQuery = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password);";
-                    using (var insertCmd = new SqliteCommand(insertQuery, conn))
-                    {
-                        insertCmd.Parameters.AddWithValue("@Username", username);
-                        insertCmd.Parameters.AddWithValue("@Password", password); // Can encrypt later
-                        insertCmd.ExecuteNonQuery();
-                    }
-
-                    MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Redirect to login page
-                    StartPage sForm = new StartPage();
-                    sForm.Show();
-                    this.Hide();
+                    success = true;
+                }
+                catch (SqliteException ex) when (ex.SqliteErrorCode == 5) // SQLITE_BUSY
+                {
+                    retryCount--;
+                    System.Threading.Thread.Sleep(delay); // wait before retry
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Show("Error: " + ex.Message, "Database Error");
+                    return;
                 }
             }
-            catch (Exception ex)
+
+            if (success)
             {
-                MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Show("Registration successful!", "Success");
+                StartPage sForm = new StartPage();
+                sForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                CustomMessageBox.Show("Database is busy. Please try again.", "Error");
             }
         }
 
-        // 🔹 Redirect to login
+
         private void login_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            StartPage sForm = new StartPage();
-            sForm.Show();
+            StartPage loginForm = new StartPage();
+            loginForm.Show();
             this.Hide();
         }
 
-        // 🔹 Show/Hide password checkbox
-        private void showPasswordChkBox_CheckedChanged(object sender, EventArgs e)
+        private void showPW_chkbox_CheckedChanged(object sender, EventArgs e)
         {
-            bool show = showPasswordChkBox.Checked;
-            register_Password.PasswordChar = show ? '\0' : '•';
-            register_ConfirmPassword.PasswordChar = show ? '\0' : '•';
-        }
-
-        // 🔹 Close the form
-        private void close_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void register_Username_TextChanged(object sender, EventArgs e)
-        {
-
+            bool show = showPW_chkbox.Checked;
+            register_Password.UseSystemPasswordChar = !show;
+            register_ConfirmPassword.UseSystemPasswordChar = !show;
         }
     }
 }

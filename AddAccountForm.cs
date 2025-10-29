@@ -5,7 +5,7 @@ using Microsoft.Data.Sqlite;
 
 namespace BuzzLock
 {
-    public partial class AddAccountForm : Form
+    public partial class AddAccountForm : CustomBorderForm
     {
         private bool isPasswordVisible = false;
 
@@ -30,49 +30,85 @@ namespace BuzzLock
             string account = txtAccount.Text.Trim();
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
-            string algorithm = cmbAlgorithm.SelectedItem.ToString();
-            string hashedPassword = "";
 
-            string encryptedPassword = EncryptionHelper.EncryptString(password);
-
-            if (string.IsNullOrEmpty(account) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (cmbAlgorithm.SelectedItem == null)
             {
-                MessageBox.Show("All fields are required.", "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CustomMessageBox.Show("Please select a hashing algorithm.", "BuzzLock");
                 return;
             }
 
-            // Hash according to chosen algorithm
-            if (algorithm == "Argon2")
-                hashedPassword = PasswordHasher.HashWithArgon2(password);
-            else
-                hashedPassword = PasswordHasher.HashWithScrypt(password);
-
-            // Save to database
-            try
+            if (string.IsNullOrEmpty(account) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                using (var conn = Database.GetConnection())
-                {
-                    conn.Open();
-                    string insert = "INSERT INTO Vault (Account, Username, Password, EncryptedPassword, Algorithm) VALUES (@a, @u, @p, @ep, @alg)";
-                    using (var cmd = new SqliteCommand(insert, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@a", account);
-                        cmd.Parameters.AddWithValue("@u", username);
-                        cmd.Parameters.AddWithValue("@p", hashedPassword);
-                        cmd.Parameters.AddWithValue("@ep", encryptedPassword);
-                        cmd.Parameters.AddWithValue("@alg", algorithm);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                CustomMessageBox.Show("All fields are required.", "BuzzLock");
+                return;
+            }
 
-                MessageBox.Show($"Account saved successfully with {algorithm} hashing!", "BuzzLock",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string algorithm = cmbAlgorithm.SelectedItem.ToString();
+            string hashedPassword = algorithm == "Argon2" ? PasswordHasher.HashWithArgon2(password)
+                                                          : PasswordHasher.HashWithScrypt(password);
+            string encryptedPassword = EncryptionHelper.EncryptString(password);
+
+            // Retry parameters
+            int retryCount = 5;
+            int delay = 300; // milliseconds
+            bool success = false;
+
+            while (!success && retryCount > 0)
+            {
+                try
+                {
+                    using (var conn = Database.GetConnection())
+                    {
+                        conn.Open();
+
+                        // Set busy timeout
+                        using (var pragmaCmd = conn.CreateCommand())
+                        {
+                            pragmaCmd.CommandText = "PRAGMA busy_timeout = 5000;";
+                            pragmaCmd.ExecuteNonQuery();
+                        }
+
+                        // Insert new vault account
+                        string insert = @"INSERT INTO Vault 
+                                  (Account, Username, Password, EncryptedPassword, Algorithm, UserId)
+                                  VALUES (@a, @u, @p, @ep, @alg, @userId);";
+
+                        using (var cmd = new SqliteCommand(insert, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@a", account);
+                            cmd.Parameters.AddWithValue("@u", username);
+                            cmd.Parameters.AddWithValue("@p", hashedPassword);
+                            cmd.Parameters.AddWithValue("@ep", encryptedPassword);
+                            cmd.Parameters.AddWithValue("@alg", algorithm);
+                            cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    success = true;
+                }
+                catch (SqliteException ex) when (ex.SqliteErrorCode == 5) // SQLITE_BUSY
+                {
+                    retryCount--;
+                    System.Threading.Thread.Sleep(delay);
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Show("Error saving account: " + ex.Message, "BuzzLock");
+                    return;
+                }
+            }
+
+            if (success)
+            {
+                CustomMessageBox.Show($"Account saved successfully with {algorithm} hashing!", "BuzzLock");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error saving account: " + ex.Message, "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Show("Database is busy. Please try again.", "BuzzLock");
             }
         }
 

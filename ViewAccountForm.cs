@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
-using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace BuzzLock
@@ -8,41 +7,125 @@ namespace BuzzLock
     public partial class ViewAccountForm : Form
     {
         private int accountId;
-
         private bool isEditing = false;
+
 
         public ViewAccountForm(int id)
         {
-            accountId = id;
             InitializeComponent();
+            accountId = id;
+            StartPosition = FormStartPosition.CenterParent;
+
             LoadAccountData();
             SetEditMode(false);
         }
 
+        public static void OpenWithPasswordVerification(int accountId, Form parent)
+        {
+            int attempts = 0;
+            bool verified = false;
+
+            while (attempts < 3 && !verified)
+            {
+                using (var pinForm = new EnterPinForm())
+                {
+                    var result = pinForm.ShowDialog(parent); // Show as modal over parent
+
+                    // If user presses Esc or closes form
+                    if (result != DialogResult.OK)
+                        return; // silently return to VaultForm
+
+                    // Check password
+                    if (ValidateUserPassword(pinForm.EnteredPassword))
+                    {
+                        verified = true;
+                        break;
+                    }
+                    else
+                    {
+                        attempts++;
+                        if (attempts >= 3)
+                            return; // silently return after 3 failed attempts
+                    }
+                }
+            }
+
+            if (verified)
+            {
+                // Password correct, open the form
+                using (var viewForm = new ViewAccountForm(accountId))
+                {
+                    viewForm.ShowDialog(parent);
+                }
+            }
+        }
+
+
+        public static bool ValidateUserPassword(string input)
+        {
+            try
+            {
+                using (var conn = Database.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT Password FROM Users WHERE Id = @userId";
+                    using (var cmd = new SqliteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
+                        string storedHash = cmd.ExecuteScalar() as string;
+                        if (string.IsNullOrEmpty(storedHash))
+                            return false;
+
+                        return PasswordHasher.Verify(input, storedHash);
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
         private void LoadAccountData()
         {
-            using (var conn = Database.GetConnection())
+            try
             {
-                conn.Open();
-                string query = "SELECT Account, Username, EncryptedPassword FROM Vault WHERE Id = @id";
-                using (var cmd = new SqliteCommand(query, conn))
+                using (var conn = Database.GetConnection())
                 {
-                    cmd.Parameters.AddWithValue("@id", accountId);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            txtAccount.Text = reader.GetString(0);
-                            txtUsername.Text = reader.GetString(1);
+                    conn.Open();
 
-                            string encryptedPassword = reader.IsDBNull(2) ? "" : reader.GetString(2);
-                            if (!string.IsNullOrEmpty(encryptedPassword))
-                                txtPassword.Text = EncryptionHelper.DecryptString(encryptedPassword);
-                            else
-                                txtPassword.Text = "(Unavailable)";
+                    using (var pragmaCmd = conn.CreateCommand())
+                    {
+                        pragmaCmd.CommandText = "PRAGMA busy_timeout = 5000;";
+                        pragmaCmd.ExecuteNonQuery();
+                    }
+
+                    string query = "SELECT Account, Username, EncryptedPassword FROM Vault WHERE Id = @id AND UserId = @userId";
+                    using (var cmd = new SqliteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", accountId);
+                        cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                txtAccount.Text = reader.GetString(0);
+                                txtUsername.Text = reader.GetString(1);
+
+                                string encryptedPassword = reader.IsDBNull(2) ? "" : reader.GetString(2);
+                                txtPassword.Text = !string.IsNullOrEmpty(encryptedPassword)
+                                    ? EncryptionHelper.DecryptString(encryptedPassword)
+                                    : "(Unavailable)";
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show("Error loading account: " + ex.Message, "BuzzLock");
             }
         }
 
@@ -69,37 +152,71 @@ namespace BuzzLock
 
             if (string.IsNullOrEmpty(account) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("All fields are required.", "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CustomMessageBox.Show("All fields are required.", "BuzzLock");
                 return;
             }
 
             string hashedPassword = PasswordHasher.HashWithArgon2(password);
             string encryptedPassword = EncryptionHelper.EncryptString(password);
 
-            try
-            {
-                using (var conn = Database.GetConnection())
-                {
-                    conn.Open();
-                    string update = "UPDATE Vault SET Account=@a, Username=@u, Password=@p, EncryptedPassword=@ep WHERE Id=@id";
-                    using (var cmd = new SqliteCommand(update, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@a", account);
-                        cmd.Parameters.AddWithValue("@u", username);
-                        cmd.Parameters.AddWithValue("@p", hashedPassword);
-                        cmd.Parameters.AddWithValue("@ep", encryptedPassword);
-                        cmd.Parameters.AddWithValue("@id", accountId);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+            int retryCount = 5;
+            int delay = 300; // milliseconds
+            bool success = false;
 
-                MessageBox.Show("Account updated successfully!", "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            while (!success && retryCount > 0)
+            {
+                try
+                {
+                    using (var conn = Database.GetConnection())
+                    {
+                        conn.Open();
+
+                        using (var pragmaCmd = conn.CreateCommand())
+                        {
+                            pragmaCmd.CommandText = "PRAGMA busy_timeout = 5000;";
+                            pragmaCmd.ExecuteNonQuery();
+                        }
+
+                        string update = @"UPDATE Vault 
+                                          SET Account = @a, Username = @u, Password = @p, EncryptedPassword = @ep 
+                                          WHERE Id = @id AND UserId = @userId";
+
+                        using (var cmd = new SqliteCommand(update, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@a", account);
+                            cmd.Parameters.AddWithValue("@u", username);
+                            cmd.Parameters.AddWithValue("@p", hashedPassword);
+                            cmd.Parameters.AddWithValue("@ep", encryptedPassword);
+                            cmd.Parameters.AddWithValue("@id", accountId);
+                            cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    success = true;
+                }
+                catch (SqliteException ex) when (ex.SqliteErrorCode == 5) // SQLITE_BUSY
+                {
+                    retryCount--;
+                    System.Threading.Thread.Sleep(delay);
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Show("Error updating account: " + ex.Message, "BuzzLock");
+                    return;
+                }
+            }
+
+            if (success)
+            {
+                CustomMessageBox.Show("Account updated successfully!", "BuzzLock");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error updating account: " + ex.Message, "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Show("Database is busy. Please try again.", "BuzzLock");
             }
         }
 
@@ -108,9 +225,9 @@ namespace BuzzLock
             this.Close();
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
+        private void close_BTN_click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

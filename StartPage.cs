@@ -1,19 +1,31 @@
-﻿using BuzzLock1._0.View;
+﻿using BuzzLock;
+using BuzzLock1._0.View;
 using Microsoft.Data.Sqlite;
 
 namespace BuzzLock1._0
 {
-    public partial class StartPage : Form
+    public partial class StartPage : CustomBorderForm
     {
         public StartPage()
         {
+
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+            this.StartPosition = FormStartPosition.CenterScreen; 
             InitializeComponent();
 
-            this.AutoScaleMode = AutoScaleMode.None;
-            this.ClientSize = new Size(1176, 654);
-            this.MaximumSize = new Size(1176, 654);
-            this.MinimumSize = new Size(1176, 654);
-            this.StartPosition = FormStartPosition.CenterScreen; // center when opened
+            this.AcceptButton = login_BTN;
+            login_BTN.FlatStyle = FlatStyle.Flat;
+            login_BTN.FlatAppearance.BorderSize = 0;
+            login_BTN.FlatAppearance.BorderColor = this.BackColor;
+            login_BTN.UseVisualStyleBackColor = false;
+            login_BTN.TabStop = false;
+
+            usernametxt.TabIndex = 0;
+            passwordtxt.TabIndex = 1;
+            login_BTN.TabIndex = 2;
+            register_BTN.TabIndex = 3;
+            forgotPasswordLinkLabel.TabIndex = 4;
+            showPW_chkbox.TabIndex = 5; // if you want
 
         }
 
@@ -29,10 +41,6 @@ namespace BuzzLock1._0
             passwordtxt.BorderStyle = BorderStyle.None;
             passwordtxt.BackColor = panelGreen;
             passwordtxt.ForeColor = Color.Black;
-
-
-            usernametxt.TabStop = false;
-            passwordtxt.TabStop = false;
 
         }
         private void RoundedPanel_Paint(object sender, PaintEventArgs e)
@@ -64,7 +72,7 @@ namespace BuzzLock1._0
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Please enter both username and password.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CustomMessageBox.Show("Please enter both username and password.", "Warning");
                 return;
             }
 
@@ -74,35 +82,51 @@ namespace BuzzLock1._0
                 {
                     conn.Open();
 
-                    string query = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password;";
+                    string query = "SELECT Id, Username, Password FROM Users WHERE Username = @Username";
                     using (var cmd = new SqliteCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Username", username);
-                        cmd.Parameters.AddWithValue("@Password", password); // optionally hash later
 
-                        long count = (long)cmd.ExecuteScalar();
-
-                        if (count > 0)
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (reader.Read())
+                            {
+                                string storedHashedPassword = reader.GetString(2);
 
-                            // 🔹 Open your next form here (e.g., Dashboard)
-                            // DashboardPage dash = new DashboardPage();
-                            // dash.Show();
-                            // this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                //verify entered password matches stored hash
+                                if (PasswordHasher.Verify(password, storedHashedPassword))
+                                {
+                                    //set session info for logged-in user
+                                    Session.CurrentUserId = reader.GetInt32(0);
+                                    Session.CurrentUsername = reader.GetString(1);
+
+                                    //MessageBox.Show($"Welcome, {Session.CurrentUsername}!", "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                    //open the user's vault
+                                    VaultForm vaultForm = new VaultForm();
+                                    vaultForm.FormClosed += (s, args) => this.Close();
+                                    vaultForm.Show();
+                                    this.Hide();
+                                }
+                                else
+                                {
+                                    CustomMessageBox.Show("Invalid password.", "Error");
+                                }
+                            }
+                            else
+                            {
+                                CustomMessageBox.Show("Username not found.", "Error");
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Show("Error: " + ex.Message, "Database Error");
             }
         }
+
 
 
         private void close_Click(object sender, EventArgs e)

@@ -10,9 +10,12 @@ namespace BuzzLock
         [STAThread]
         static void Main()
         {
-            Database.Initialize(); 
+            
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Database.Initialize();
             Application.Run(new StartPage());
             //no changes/ testing purposes
         }
