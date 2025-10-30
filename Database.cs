@@ -21,9 +21,11 @@ namespace BuzzLock
                 string createVaultTable = @"
                     CREATE TABLE IF NOT EXISTS Vault (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        UserId INTEGER NOT NULL,
                         Account TEXT NOT NULL,
                         Username TEXT NOT NULL,
                         Password TEXT NOT NULL,
+                        EncryptedPassword TEXT NOT NULL,
                         Algorithm TEXT
                     );
                 ";

@@ -71,7 +71,7 @@ namespace BuzzLock
                         // Insert new vault account
                         string insert = @"INSERT INTO Vault 
                                   (Account, Username, Password, EncryptedPassword, Algorithm, UserId)
-                                  VALUES (@a, @u, @p, @ep, @alg, @userId);";
+                                  VALUES (@a, @u, @p, @ep, @alg, @UserId);";
 
                         using (var cmd = new SqliteCommand(insert, conn))
                         {
@@ -80,7 +80,7 @@ namespace BuzzLock
                             cmd.Parameters.AddWithValue("@p", hashedPassword);
                             cmd.Parameters.AddWithValue("@ep", encryptedPassword);
                             cmd.Parameters.AddWithValue("@alg", algorithm);
-                            cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
+                            cmd.Parameters.AddWithValue("@UserId", Session.CurrentUserId);
 
                             cmd.ExecuteNonQuery();
                         }

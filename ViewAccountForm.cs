@@ -136,7 +136,7 @@ namespace BuzzLock
             txtUsername.ReadOnly = !enable;
             txtPassword.ReadOnly = !enable;
             btnSave.Enabled = enable;
-            btnEdit.Enabled = !enable;
+            btnCancel.Enabled = enable;
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -228,6 +228,23 @@ namespace BuzzLock
         private void close_BTN_click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void BtnCopy_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPassword.Text))
+            {
+                Clipboard.SetText(txtPassword.Text);
+            }
+            else
+            {
+                CustomMessageBox.Show("No password to copy. Generate one first.", "BuzzLock");
+            }
+        }
+
+        private void ViewAccountForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

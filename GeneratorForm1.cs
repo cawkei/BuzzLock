@@ -5,13 +5,13 @@ namespace BuzzLock
     public partial class GeneratorForm1 : CustomBorderForm
     {
         private TextBox txtPassword;
-        private Button btnGenerate;
         private CheckBox chkSpecial;
         private CheckBox chkNumbers;
         private CheckBox chkLowercase;
         private CheckBox chkUppercase;
+        private Button BtnCopy;
+        private Button BtnGenerate;
         private NumericUpDown numericUpDownLength;
-        private Button btnCopy;
 
         public GeneratorForm1()
         {
@@ -22,13 +22,13 @@ namespace BuzzLock
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneratorForm1));
             txtPassword = new TextBox();
-            btnCopy = new Button();
-            btnGenerate = new Button();
             chkSpecial = new CheckBox();
             chkNumbers = new CheckBox();
             chkLowercase = new CheckBox();
             chkUppercase = new CheckBox();
             numericUpDownLength = new NumericUpDown();
+            BtnCopy = new Button();
+            BtnGenerate = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDownLength).BeginInit();
             SuspendLayout();
             // 
@@ -46,42 +46,13 @@ namespace BuzzLock
             txtPassword.UseSystemPasswordChar = true;
             txtPassword.TextChanged += txtPassword_TextChanged;
             // 
-            // btnCopy
-            // 
-            btnCopy.BackColor = Color.Transparent;
-            btnCopy.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCopy.FlatAppearance.BorderSize = 0;
-            btnCopy.FlatStyle = FlatStyle.Flat;
-            btnCopy.ForeColor = Color.Transparent;
-            btnCopy.Location = new Point(726, 193);
-            btnCopy.Name = "btnCopy";
-            btnCopy.Size = new Size(56, 59);
-            btnCopy.TabIndex = 7;
-            btnCopy.UseVisualStyleBackColor = false;
-            btnCopy.Click += BtnCopy_Click;
-            // 
-            // btnGenerate
-            // 
-            btnGenerate.BackColor = Color.Transparent;
-            btnGenerate.BackgroundImageLayout = ImageLayout.None;
-            btnGenerate.FlatAppearance.BorderSize = 0;
-            btnGenerate.FlatStyle = FlatStyle.Flat;
-            btnGenerate.ForeColor = Color.Transparent;
-            btnGenerate.Location = new Point(651, 199);
-            btnGenerate.Name = "btnGenerate";
-            btnGenerate.Size = new Size(40, 47);
-            btnGenerate.TabIndex = 6;
-            btnGenerate.UseMnemonic = false;
-            btnGenerate.UseVisualStyleBackColor = false;
-            btnGenerate.Click += BtnGenerate_Click;
-            // 
             // chkSpecial
             // 
             chkSpecial.BackColor = Color.Transparent;
             chkSpecial.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkSpecial.Location = new Point(488, 272);
+            chkSpecial.Location = new Point(502, 277);
             chkSpecial.Name = "chkSpecial";
-            chkSpecial.Size = new Size(108, 31);
+            chkSpecial.Size = new Size(108, 32);
             chkSpecial.TabIndex = 5;
             chkSpecial.Text = "!@#$%&*";
             chkSpecial.UseVisualStyleBackColor = false;
@@ -91,9 +62,9 @@ namespace BuzzLock
             // 
             chkNumbers.BackColor = Color.Transparent;
             chkNumbers.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkNumbers.Location = new Point(356, 272);
+            chkNumbers.Location = new Point(376, 277);
             chkNumbers.Name = "chkNumbers";
-            chkNumbers.Size = new Size(108, 31);
+            chkNumbers.Size = new Size(108, 32);
             chkNumbers.TabIndex = 4;
             chkNumbers.Text = "0 - 9";
             chkNumbers.UseVisualStyleBackColor = false;
@@ -103,7 +74,7 @@ namespace BuzzLock
             // 
             chkLowercase.BackColor = Color.Transparent;
             chkLowercase.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkLowercase.Location = new Point(101, 271);
+            chkLowercase.Location = new Point(125, 277);
             chkLowercase.Name = "chkLowercase";
             chkLowercase.Size = new Size(108, 32);
             chkLowercase.TabIndex = 3;
@@ -115,9 +86,9 @@ namespace BuzzLock
             // 
             chkUppercase.BackColor = Color.Transparent;
             chkUppercase.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            chkUppercase.Location = new Point(215, 271);
+            chkUppercase.Location = new Point(251, 277);
             chkUppercase.Name = "chkUppercase";
-            chkUppercase.Size = new Size(108, 27);
+            chkUppercase.Size = new Size(108, 32);
             chkUppercase.TabIndex = 2;
             chkUppercase.Text = "A - Z";
             chkUppercase.UseVisualStyleBackColor = false;
@@ -128,28 +99,65 @@ namespace BuzzLock
             numericUpDownLength.BackColor = Color.White;
             numericUpDownLength.BorderStyle = BorderStyle.None;
             numericUpDownLength.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            numericUpDownLength.Location = new Point(641, 272);
+            numericUpDownLength.Location = new Point(660, 280);
             numericUpDownLength.Maximum = new decimal(new int[] { 130, 0, 0, 0 });
             numericUpDownLength.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
             numericUpDownLength.Name = "numericUpDownLength";
-            numericUpDownLength.Size = new Size(108, 31);
+            numericUpDownLength.Size = new Size(108, 26);
             numericUpDownLength.TabIndex = 1;
             numericUpDownLength.Value = new decimal(new int[] { 25, 0, 0, 0 });
             numericUpDownLength.ValueChanged += numericUpDownLength_ValueChanged;
+            // 
+            // BtnCopy
+            // 
+            BtnCopy.BackColor = Color.Transparent;
+            BtnCopy.BackgroundImageLayout = ImageLayout.Stretch;
+            BtnCopy.Cursor = Cursors.Hand;
+            BtnCopy.FlatAppearance.BorderSize = 0;
+            BtnCopy.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            BtnCopy.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            BtnCopy.FlatStyle = FlatStyle.Flat;
+            BtnCopy.Location = new Point(719, 183);
+            BtnCopy.Margin = new Padding(2);
+            BtnCopy.Name = "BtnCopy";
+            BtnCopy.Size = new Size(69, 75);
+            BtnCopy.TabIndex = 16;
+            BtnCopy.TabStop = false;
+            BtnCopy.UseVisualStyleBackColor = false;
+            BtnCopy.Click += BtnCopy_Click;
+            // 
+            // BtnGenerate
+            // 
+            BtnGenerate.BackColor = Color.Transparent;
+            BtnGenerate.BackgroundImageLayout = ImageLayout.Stretch;
+            BtnGenerate.Cursor = Cursors.Hand;
+            BtnGenerate.FlatAppearance.BorderSize = 0;
+            BtnGenerate.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            BtnGenerate.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            BtnGenerate.FlatStyle = FlatStyle.Flat;
+            BtnGenerate.Location = new Point(647, 199);
+            BtnGenerate.Margin = new Padding(2);
+            BtnGenerate.Name = "BtnGenerate";
+            BtnGenerate.Size = new Size(52, 47);
+            BtnGenerate.TabIndex = 17;
+            BtnGenerate.TabStop = false;
+            BtnGenerate.UseVisualStyleBackColor = false;
+            BtnGenerate.Click += BtnGenerate_Click;
             // 
             // GeneratorForm1
             // 
             BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
+            BorderColor = Color.White;
             ClientSize = new Size(884, 492);
-            Controls.Add(btnGenerate);
+            Controls.Add(BtnGenerate);
+            Controls.Add(BtnCopy);
             Controls.Add(numericUpDownLength);
             Controls.Add(chkUppercase);
             Controls.Add(chkLowercase);
             Controls.Add(chkNumbers);
             Controls.Add(chkSpecial);
-            Controls.Add(btnCopy);
             Controls.Add(txtPassword);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -189,7 +197,6 @@ namespace BuzzLock
             if (!string.IsNullOrEmpty(txtPassword.Text))
             {
                 Clipboard.SetText(txtPassword.Text);
-                CustomMessageBox.Show("Password copied to clipboard.", "BuzzLock");
             }
             else
             {

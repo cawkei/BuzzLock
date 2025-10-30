@@ -36,6 +36,7 @@ namespace BuzzLock
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VaultForm));
             vaultGrid = new DataGridView();
             btnAdd = new Button();
@@ -47,42 +48,50 @@ namespace BuzzLock
             // 
             // vaultGrid
             // 
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 222, 89);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 222, 89);
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            vaultGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             vaultGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             vaultGrid.BackgroundColor = Color.FromArgb(255, 222, 89);
             vaultGrid.BorderStyle = BorderStyle.None;
-            vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 237, 164);
-            dataGridViewCellStyle1.Font = new Font("Bahnschrift Light Condensed", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Info;
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(255, 237, 164);
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            vaultGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            vaultGrid.ColumnHeadersHeight = 29;
+            vaultGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 237, 164);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 128, 0);
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(255, 237, 164);
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            vaultGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            vaultGrid.GridColor = Color.FromArgb(255, 128, 0);
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 222, 89);
+            dataGridViewCellStyle2.Font = new Font("ROG Fonts", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 222, 89);
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            vaultGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            vaultGrid.ColumnHeadersHeight = 29;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 222, 89);
+            dataGridViewCellStyle3.Font = new Font("Bahnschrift Condensed", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 222, 89);
+            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            vaultGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            vaultGrid.EnableHeadersVisualStyles = false;
+            vaultGrid.GridColor = Color.Black;
             vaultGrid.Location = new Point(56, 112);
             vaultGrid.Name = "vaultGrid";
             vaultGrid.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 237, 164);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 128, 0);
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            vaultGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            vaultGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(255, 237, 164);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(255, 128, 0);
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            vaultGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             vaultGrid.RowHeadersWidth = 60;
             vaultGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            vaultGrid.Size = new Size(694, 330);
+            vaultGrid.Size = new Size(699, 330);
             vaultGrid.TabIndex = 0;
             vaultGrid.CellContentClick += vaultGrid_CellContentClick;
             vaultGrid.CellDoubleClick += VaultGrid_CellDoubleClick;
@@ -90,6 +99,7 @@ namespace BuzzLock
             // btnAdd
             // 
             btnAdd.BackColor = Color.Transparent;
+            btnAdd.BackgroundImageLayout = ImageLayout.Stretch;
             btnAdd.Cursor = Cursors.Hand;
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -106,6 +116,7 @@ namespace BuzzLock
             // btnGenerator
             // 
             btnGenerator.BackColor = Color.Transparent;
+            btnGenerator.BackgroundImageLayout = ImageLayout.Stretch;
             btnGenerator.Cursor = Cursors.Hand;
             btnGenerator.FlatAppearance.BorderSize = 0;
             btnGenerator.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -123,15 +134,17 @@ namespace BuzzLock
             // 
             txtSearch.BackColor = Color.FromArgb(166, 231, 138);
             txtSearch.BorderStyle = BorderStyle.None;
-            txtSearch.Location = new Point(354, 68);
+            txtSearch.Font = new Font("Bahnschrift Condensed", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSearch.Location = new Point(345, 68);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(458, 24);
+            txtSearch.Size = new Size(477, 25);
             txtSearch.TabIndex = 4;
             txtSearch.TextChanged += TxtSearch_TextChanged;
             // 
             // btnDelete
             // 
             btnDelete.BackColor = Color.Transparent;
+            btnDelete.BackgroundImageLayout = ImageLayout.Stretch;
             btnDelete.Cursor = Cursors.Hand;
             btnDelete.FlatAppearance.BorderSize = 0;
             btnDelete.FlatAppearance.MouseDownBackColor = Color.Transparent;
