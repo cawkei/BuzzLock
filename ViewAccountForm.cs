@@ -156,7 +156,7 @@ namespace BuzzLock
                 return;
             }
 
-            string hashedPassword = PasswordHasher.HashWithArgon2(password);
+            // Encrypt the password (no hashing)
             string encryptedPassword = EncryptionHelper.EncryptString(password);
 
             int retryCount = 5;
@@ -177,15 +177,15 @@ namespace BuzzLock
                             pragmaCmd.ExecuteNonQuery();
                         }
 
+                        // Update only the EncryptedPassword field (no hashing)
                         string update = @"UPDATE Vault 
-                                          SET Account = @a, Username = @u, Password = @p, EncryptedPassword = @ep 
-                                          WHERE Id = @id AND UserId = @userId";
+                                  SET Account = @a, Username = @u, EncryptedPassword = @ep 
+                                  WHERE Id = @id AND UserId = @userId";
 
                         using (var cmd = new SqliteCommand(update, conn))
                         {
                             cmd.Parameters.AddWithValue("@a", account);
                             cmd.Parameters.AddWithValue("@u", username);
-                            cmd.Parameters.AddWithValue("@p", hashedPassword);
                             cmd.Parameters.AddWithValue("@ep", encryptedPassword);
                             cmd.Parameters.AddWithValue("@id", accountId);
                             cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
@@ -219,6 +219,7 @@ namespace BuzzLock
                 CustomMessageBox.Show("Database is busy. Please try again.", "BuzzLock");
             }
         }
+
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {

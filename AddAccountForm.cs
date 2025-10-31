@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using Microsoft.Data.Sqlite;
 
-
 namespace BuzzLock
 {
     public partial class AddAccountForm : CustomBorderForm
@@ -31,24 +30,20 @@ namespace BuzzLock
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            if (cmbAlgorithm.SelectedItem == null)
-            {
-                CustomMessageBox.Show("Please select a hashing algorithm.", "BuzzLock");
-                return;
-            }
-
             if (string.IsNullOrEmpty(account) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                CustomMessageBox.Show("All fields are required.", "BuzzLock");
+                CustomMessageBox.Show("Please fill in all fields before saving.", "BuzzLock");
                 return;
             }
 
-            string algorithm = cmbAlgorithm.SelectedItem.ToString();
-            string hashedPassword = algorithm == "Argon2" ? PasswordHasher.HashWithArgon2(password)
-                                                          : PasswordHasher.HashWithScrypt(password);
+            if (Session.CurrentUserId == 0)
+            {
+                CustomMessageBox.Show("Error: User not logged in.", "BuzzLock");
+                return;
+            }
+
             string encryptedPassword = EncryptionHelper.EncryptString(password);
 
-            // Retry parameters
             int retryCount = 5;
             int delay = 300; // milliseconds
             bool success = false;
@@ -61,34 +56,29 @@ namespace BuzzLock
                     {
                         conn.Open();
 
-                        // Set busy timeout
                         using (var pragmaCmd = conn.CreateCommand())
                         {
                             pragmaCmd.CommandText = "PRAGMA busy_timeout = 5000;";
                             pragmaCmd.ExecuteNonQuery();
                         }
 
-                        // Insert new vault account
                         string insert = @"INSERT INTO Vault 
-                                  (Account, Username, Password, EncryptedPassword, Algorithm, UserId)
-                                  VALUES (@a, @u, @p, @ep, @alg, @UserId);";
+                                  (Account, Username, EncryptedPassword, UserId)
+                                  VALUES (@a, @u, @ep, @UserId);";
 
                         using (var cmd = new SqliteCommand(insert, conn))
                         {
                             cmd.Parameters.AddWithValue("@a", account);
                             cmd.Parameters.AddWithValue("@u", username);
-                            cmd.Parameters.AddWithValue("@p", hashedPassword);
                             cmd.Parameters.AddWithValue("@ep", encryptedPassword);
-                            cmd.Parameters.AddWithValue("@alg", algorithm);
                             cmd.Parameters.AddWithValue("@UserId", Session.CurrentUserId);
 
                             cmd.ExecuteNonQuery();
                         }
                     }
-
                     success = true;
                 }
-                catch (SqliteException ex) when (ex.SqliteErrorCode == 5) // SQLITE_BUSY
+                catch (SqliteException ex) when (ex.SqliteErrorCode == 5)
                 {
                     retryCount--;
                     System.Threading.Thread.Sleep(delay);
@@ -102,34 +92,24 @@ namespace BuzzLock
 
             if (success)
             {
-                CustomMessageBox.Show($"Account saved successfully with {algorithm} hashing!", "BuzzLock");
+                CustomMessageBox.Show("Account saved successfully!", "BuzzLock");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                CustomMessageBox.Show("Database is busy. Please try again.", "BuzzLock");
+                CustomMessageBox.Show("Failed to save account after multiple attempts.", "BuzzLock");
             }
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void txtAccount_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -137,7 +117,7 @@ namespace BuzzLock
 
         }
 
-        private void BtnGenerator_Click(object sender, EventArgs e)
+        private void BtnGenerate_Click(object sender, EventArgs e)
         {
             GeneratorForm1 generator = new GeneratorForm1();
             generator.ShowDialog();
