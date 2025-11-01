@@ -59,11 +59,9 @@ namespace BuzzLock
             vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 222, 89);
-<<<<<<< HEAD
             dataGridViewCellStyle2.Font = new Font("ROG Fonts", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, 0);
-=======
             dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
->>>>>>> 4e2afe99cd4a702b17b99e8218af0b1cd9cb1526
+
             dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 222, 89);
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
