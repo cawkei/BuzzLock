@@ -18,9 +18,11 @@ namespace BuzzLock
             isPasswordVisible = !isPasswordVisible;
             txtPassword.PasswordChar = isPasswordVisible ? '\0' : '*';
         }
-
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            VaultForm vaultForm = new VaultForm();
+            vaultForm.Show();
             this.Close();
         }
 
@@ -33,12 +35,6 @@ namespace BuzzLock
             if (string.IsNullOrEmpty(account) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 CustomMessageBox.Show("Please fill in all fields before saving.", "BuzzLock");
-                return;
-            }
-
-            if (Session.CurrentUserId == 0)
-            {
-                CustomMessageBox.Show("Error: User not logged in.", "BuzzLock");
                 return;
             }
 

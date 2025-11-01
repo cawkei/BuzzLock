@@ -45,7 +45,7 @@
             txtUsername.BorderStyle = BorderStyle.None;
             txtUsername.Font = new Font("Bahnschrift Condensed", 16.2F);
             txtUsername.ForeColor = Color.Black;
-            txtUsername.Location = new Point(251, 240);
+            txtUsername.Location = new Point(251, 241);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(551, 33);
             txtUsername.TabIndex = 1;
@@ -56,7 +56,7 @@
             txtAccount.BackColor = SystemColors.Info;
             txtAccount.BorderStyle = BorderStyle.None;
             txtAccount.Font = new Font("Bahnschrift Condensed", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAccount.Location = new Point(251, 169);
+            txtAccount.Location = new Point(251, 168);
             txtAccount.Name = "txtAccount";
             txtAccount.Size = new Size(551, 33);
             txtAccount.TabIndex = 3;
@@ -67,7 +67,7 @@
             txtPassword.BackColor = SystemColors.Info;
             txtPassword.BorderStyle = BorderStyle.None;
             txtPassword.Font = new Font("Bahnschrift Condensed", 16.2F);
-            txtPassword.Location = new Point(251, 317);
+            txtPassword.Location = new Point(251, 316);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(461, 33);
@@ -83,7 +83,7 @@
             btnGenerate.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnGenerate.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnGenerate.FlatStyle = FlatStyle.Flat;
-            btnGenerate.Location = new Point(306, 387);
+            btnGenerate.Location = new Point(305, 387);
             btnGenerate.Margin = new Padding(2);
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new Size(160, 42);
@@ -101,7 +101,7 @@
             btnSave.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnSave.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnSave.FlatStyle = FlatStyle.Flat;
-            btnSave.Location = new Point(483, 387);
+            btnSave.Location = new Point(482, 387);
             btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(157, 42);
@@ -119,7 +119,7 @@
             btnCancel.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnCancel.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.Location = new Point(658, 387);
+            btnCancel.Location = new Point(657, 387);
             btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(155, 42);
@@ -137,10 +137,10 @@
             BtnShowHde.FlatAppearance.MouseDownBackColor = Color.Transparent;
             BtnShowHde.FlatAppearance.MouseOverBackColor = Color.Transparent;
             BtnShowHde.FlatStyle = FlatStyle.Flat;
-            BtnShowHde.Location = new Point(717, 297);
+            BtnShowHde.Location = new Point(717, 290);
             BtnShowHde.Margin = new Padding(2);
             BtnShowHde.Name = "BtnShowHde";
-            BtnShowHde.Size = new Size(85, 64);
+            BtnShowHde.Size = new Size(85, 73);
             BtnShowHde.TabIndex = 15;
             BtnShowHde.TabStop = false;
             BtnShowHde.UseVisualStyleBackColor = false;
@@ -159,7 +159,8 @@
             Controls.Add(txtUsername);
             Controls.Add(txtAccount);
             Controls.Add(txtPassword);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "AddAccountForm";

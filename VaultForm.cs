@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using Microsoft.Data.Sqlite;
 
 
-
 namespace BuzzLock
 
 {
@@ -60,13 +59,13 @@ namespace BuzzLock
             vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 222, 89);
-            dataGridViewCellStyle2.Font = new Font("ROG Fonts", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.Font = new Font("ROG Fonts", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 222, 89);
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             vaultGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            vaultGrid.ColumnHeadersHeight = 29;
+            vaultGrid.ColumnHeadersHeight = 35;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 222, 89);
             dataGridViewCellStyle3.Font = new Font("Bahnschrift Condensed", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -77,7 +76,7 @@ namespace BuzzLock
             vaultGrid.DefaultCellStyle = dataGridViewCellStyle3;
             vaultGrid.EnableHeadersVisualStyles = false;
             vaultGrid.GridColor = Color.Black;
-            vaultGrid.Location = new Point(56, 112);
+            vaultGrid.Location = new Point(54, 118);
             vaultGrid.Name = "vaultGrid";
             vaultGrid.ReadOnly = true;
             vaultGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -91,7 +90,7 @@ namespace BuzzLock
             vaultGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             vaultGrid.RowHeadersWidth = 60;
             vaultGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            vaultGrid.Size = new Size(699, 330);
+            vaultGrid.Size = new Size(699, 319);
             vaultGrid.TabIndex = 0;
             vaultGrid.CellContentClick += vaultGrid_CellContentClick;
             vaultGrid.CellDoubleClick += VaultGrid_CellDoubleClick;
@@ -269,9 +268,6 @@ namespace BuzzLock
                 }
             }
         }
-
-
-
 
         private void vaultGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
 

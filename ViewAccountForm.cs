@@ -136,7 +136,7 @@ namespace BuzzLock
             txtUsername.ReadOnly = !enable;
             txtPassword.ReadOnly = !enable;
             btnSave.Enabled = enable;
-            btnCancel.Enabled = enable;
+            btnCancel.Enabled = true;
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -223,6 +223,7 @@ namespace BuzzLock
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
