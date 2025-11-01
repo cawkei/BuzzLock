@@ -204,7 +204,6 @@ namespace BuzzLock
             }
         }
 
-
         // Password generation logic
         private string GeneratePassword(int length, bool useUpper, bool useLower, bool useNumbers, bool useSpecial)
         {

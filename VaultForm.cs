@@ -60,7 +60,7 @@ namespace BuzzLock
             vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 222, 89);
-            dataGridViewCellStyle2.Font = new Font("ROG Fonts", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 222, 89);
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
@@ -137,7 +137,7 @@ namespace BuzzLock
             txtSearch.Font = new Font("Bahnschrift Condensed", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSearch.Location = new Point(345, 68);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(477, 25);
+            txtSearch.Size = new Size(477, 29);
             txtSearch.TabIndex = 4;
             txtSearch.TextChanged += TxtSearch_TextChanged;
             // 
@@ -156,6 +156,7 @@ namespace BuzzLock
             btnDelete.TabIndex = 5;
             btnDelete.TabStop = false;
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // VaultForm
             // 
@@ -242,7 +243,7 @@ namespace BuzzLock
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading vault: " + ex.Message, "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Show("Error loading vault: " + ex.Message, "BuzzLock");
             }
         }
         private void VaultGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -265,7 +266,7 @@ namespace BuzzLock
                         // Refresh vault data after closing the view form
                         LoadVaultData();
                     }
-                    
+
                 }
             }
         }
@@ -277,6 +278,59 @@ namespace BuzzLock
 
         {
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            //dapat mag select row first
+            if (vaultGrid.SelectedRows.Count == 0)
+            {
+                CustomMessageBox.Show("Please select an account to delete.", "BuzzLock");
+                return;
+            }
+
+            //get the selected row and its ID
+            int id = Convert.ToInt32(vaultGrid.SelectedRows[0].Cells["Id"].Value);
+            string accountName = vaultGrid.SelectedRows[0].Cells["Account"].Value.ToString();
+
+            //ask user for confirmation
+            DialogResult confirm = CustomMessageBox.Show(
+                $"Are you sure you want to delete '{accountName}'?",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                try
+                {
+                    using (var conn = new SqliteConnection("Data Source=BuzzLock.db;Mode=ReadWrite"))
+                    {
+                        conn.Open();
+
+                        using (var cmd = new SqliteCommand("DELETE FROM Vault WHERE Id = @id AND UserId = @userId", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", id);
+                            cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                CustomMessageBox.Show("Account deleted successfully.", "BuzzLock");
+                                LoadVaultData(); //refresh the vault grid
+                            }
+                            else
+                            {
+                                CustomMessageBox.Show("Failed to delete the account. Please try again.", "BuzzLock");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Show("Error deleting account: " + ex.Message, "BuzzLock");
+                }
+            }
         }
     }
 }
