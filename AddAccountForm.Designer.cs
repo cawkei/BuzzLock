@@ -33,7 +33,6 @@
             txtUsername = new TextBox();
             txtAccount = new TextBox();
             txtPassword = new TextBox();
-            cmbAlgorithm = new ComboBox();
             btnGenerate = new Button();
             btnSave = new Button();
             btnCancel = new Button();
@@ -46,9 +45,9 @@
             txtUsername.BorderStyle = BorderStyle.None;
             txtUsername.Font = new Font("Bahnschrift Condensed", 16.2F);
             txtUsername.ForeColor = Color.Black;
-            txtUsername.Location = new Point(239, 209);
+            txtUsername.Location = new Point(251, 240);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(556, 33);
+            txtUsername.Size = new Size(551, 33);
             txtUsername.TabIndex = 1;
             txtUsername.TextChanged += txtAccount_TextChanged;
             // 
@@ -57,9 +56,9 @@
             txtAccount.BackColor = SystemColors.Info;
             txtAccount.BorderStyle = BorderStyle.None;
             txtAccount.Font = new Font("Bahnschrift Condensed", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAccount.Location = new Point(239, 148);
+            txtAccount.Location = new Point(251, 169);
             txtAccount.Name = "txtAccount";
-            txtAccount.Size = new Size(556, 33);
+            txtAccount.Size = new Size(551, 33);
             txtAccount.TabIndex = 3;
             txtAccount.TextChanged += txtUsername_TextChanged;
             // 
@@ -68,24 +67,12 @@
             txtPassword.BackColor = SystemColors.Info;
             txtPassword.BorderStyle = BorderStyle.None;
             txtPassword.Font = new Font("Bahnschrift Condensed", 16.2F);
-            txtPassword.Location = new Point(239, 276);
+            txtPassword.Location = new Point(251, 317);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(468, 33);
+            txtPassword.Size = new Size(461, 33);
             txtPassword.TabIndex = 5;
             txtPassword.TextChanged += txtPassword_TextChanged;
-            // 
-            // cmbAlgorithm
-            // 
-            cmbAlgorithm.BackColor = SystemColors.Info;
-            cmbAlgorithm.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbAlgorithm.Font = new Font("Bahnschrift Condensed", 13.8F);
-            cmbAlgorithm.ForeColor = SystemColors.ActiveBorder;
-            cmbAlgorithm.Items.AddRange(new object[] { "Argon2", "Scrypt" });
-            cmbAlgorithm.Location = new Point(239, 336);
-            cmbAlgorithm.Name = "cmbAlgorithm";
-            cmbAlgorithm.Size = new Size(556, 36);
-            cmbAlgorithm.TabIndex = 8;
             // 
             // btnGenerate
             // 
@@ -96,14 +83,14 @@
             btnGenerate.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnGenerate.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnGenerate.FlatStyle = FlatStyle.Flat;
-            btnGenerate.Location = new Point(311, 401);
+            btnGenerate.Location = new Point(306, 387);
             btnGenerate.Margin = new Padding(2);
             btnGenerate.Name = "btnGenerate";
-            btnGenerate.Size = new Size(159, 44);
+            btnGenerate.Size = new Size(160, 42);
             btnGenerate.TabIndex = 12;
             btnGenerate.TabStop = false;
             btnGenerate.UseVisualStyleBackColor = false;
-            btnGenerate.Click += BtnGenerator_Click;
+            btnGenerate.Click += BtnGenerate_Click;
             // 
             // btnSave
             // 
@@ -114,10 +101,10 @@
             btnSave.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnSave.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnSave.FlatStyle = FlatStyle.Flat;
-            btnSave.Location = new Point(485, 401);
+            btnSave.Location = new Point(483, 387);
             btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(159, 44);
+            btnSave.Size = new Size(157, 42);
             btnSave.TabIndex = 13;
             btnSave.TabStop = false;
             btnSave.UseVisualStyleBackColor = false;
@@ -132,10 +119,10 @@
             btnCancel.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnCancel.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.Location = new Point(648, 401);
+            btnCancel.Location = new Point(658, 387);
             btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(162, 44);
+            btnCancel.Size = new Size(155, 42);
             btnCancel.TabIndex = 14;
             btnCancel.TabStop = false;
             btnCancel.UseVisualStyleBackColor = false;
@@ -150,10 +137,10 @@
             BtnShowHde.FlatAppearance.MouseDownBackColor = Color.Transparent;
             BtnShowHde.FlatAppearance.MouseOverBackColor = Color.Transparent;
             BtnShowHde.FlatStyle = FlatStyle.Flat;
-            BtnShowHde.Location = new Point(714, 265);
+            BtnShowHde.Location = new Point(717, 297);
             BtnShowHde.Margin = new Padding(2);
             BtnShowHde.Name = "BtnShowHde";
-            BtnShowHde.Size = new Size(68, 54);
+            BtnShowHde.Size = new Size(85, 64);
             BtnShowHde.TabIndex = 15;
             BtnShowHde.TabStop = false;
             BtnShowHde.UseVisualStyleBackColor = false;
@@ -172,7 +159,6 @@
             Controls.Add(txtUsername);
             Controls.Add(txtAccount);
             Controls.Add(txtPassword);
-            Controls.Add(cmbAlgorithm);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -189,7 +175,6 @@
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtAccount;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.ComboBox cmbAlgorithm;
         private Button btnGenerate;
         private Button btnSave;
         private Button btnCancel;

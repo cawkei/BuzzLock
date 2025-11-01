@@ -23,21 +23,6 @@ namespace BuzzLock
             return $"$argon2${Convert.ToBase64String(salt)}${Convert.ToBase64String(hash)}";
         }
 
-        public static string HashWithScrypt(string password)
-        {
-            byte[] salt = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
-
-            byte[] hash = SCrypt.ComputeDerivedKey(
-                Encoding.UTF8.GetBytes(password),
-                salt,
-                16384, // Cost
-                8,     // Block size
-                1,     // Parallelism
-                null,  // Max threads
-                32);   // Derived key length (int)
-
-            return $"$scrypt${Convert.ToBase64String(salt)}${Convert.ToBase64String(hash)}";
-        }
         public static bool Verify(string password, string storedHash)
         {
             try
@@ -61,17 +46,6 @@ namespace BuzzLock
                         Iterations = 4
                     };
                     computedBytes = argon2.GetBytes(32);
-                }
-                else if (algorithm == "scrypt")
-                {
-                    computedBytes = SCrypt.ComputeDerivedKey(
-                        Encoding.UTF8.GetBytes(password),
-                        salt,
-                        16384,
-                        8,
-                        1,
-                        null,
-                        32);
                 }
                 else
                 {

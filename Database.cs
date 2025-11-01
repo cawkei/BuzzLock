@@ -24,9 +24,7 @@ namespace BuzzLock
                         UserId INTEGER NOT NULL,
                         Account TEXT NOT NULL,
                         Username TEXT NOT NULL,
-                        Password TEXT NOT NULL,
-                        EncryptedPassword TEXT NOT NULL,
-                        Algorithm TEXT
+                        EncryptedPassword TEXT NOT NULL
                     );
                 ";
 
