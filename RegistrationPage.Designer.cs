@@ -158,6 +158,7 @@
             registerBtn.Name = "registerBtn";
             registerBtn.Size = new Size(163, 39);
             registerBtn.TabIndex = 10;
+            registerBtn.TabStop = false;
             registerBtn.UseVisualStyleBackColor = false;
             registerBtn.Click += registerBtn_Click;
             // 
@@ -178,7 +179,7 @@
             showPW_chkbox.BackColor = Color.Transparent;
             showPW_chkbox.Cursor = Cursors.Hand;
             showPW_chkbox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            showPW_chkbox.Location = new Point(181, 443);
+            showPW_chkbox.Location = new Point(185, 438);
             showPW_chkbox.Name = "showPW_chkbox";
             showPW_chkbox.Size = new Size(172, 32);
             showPW_chkbox.TabIndex = 12;

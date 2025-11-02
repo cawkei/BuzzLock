@@ -64,7 +64,7 @@
             Controls.Add(confirmEmailtxt);
             DoubleBuffered = true;
             Name = "Confirm_Email";
-            Text = "Confirm_Email";
+            Text = "BuzzLock";
             Click += confirmBTN_click;
             ResumeLayout(false);
             PerformLayout();

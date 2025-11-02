@@ -9,7 +9,6 @@ namespace BuzzLock
         private int accountId;
         private bool isEditing = false;
 
-
         public ViewAccountForm(int id)
         {
             InitializeComponent();
@@ -20,23 +19,24 @@ namespace BuzzLock
             SetEditMode(false);
         }
 
-        public static void OpenWithPasswordVerification(int accountId, Form parent)
+        /// <summary>
+        /// Opens ViewAccountForm after verifying user's PIN.
+        /// </summary>
+        public static void OpenWithPinVerification(int accountId, Form parent)
         {
             int attempts = 0;
             bool verified = false;
 
             while (attempts < 3 && !verified)
             {
-                using (var pinForm = new EnterPinForm())
+                using (var pinForm = new EnterPinForm(Session.CurrentUsername)) // pass username
                 {
-                    var result = pinForm.ShowDialog(parent); // Show as modal over parent
+                    var result = pinForm.ShowDialog(parent); // modal over parent
 
-                    // If user presses Esc or closes form
                     if (result != DialogResult.OK)
-                        return; // silently return to VaultForm
+                        return; // user cancelled or closed form
 
-                    // Check password
-                    if (ValidateUserPassword(pinForm.EnteredPassword))
+                    if (ValidateUserPin(pinForm.EnteredPassword))
                     {
                         verified = true;
                         break;
@@ -44,31 +44,36 @@ namespace BuzzLock
                     else
                     {
                         attempts++;
-                        if (attempts >= 3)
-                            return; // silently return after 3 failed attempts
+                        if (attempts < 3)
+                            CustomMessageBox.Show($"Incorrect PIN. Attempts remaining: {3 - attempts}", "BuzzLock");
                     }
                 }
             }
 
             if (verified)
             {
-                // Password correct, open the form
                 using (var viewForm = new ViewAccountForm(accountId))
                 {
                     viewForm.ShowDialog(parent);
                 }
             }
+            else
+            {
+                CustomMessageBox.Show("Maximum attempts reached. Access denied.", "BuzzLock");
+            }
         }
 
-
-        public static bool ValidateUserPassword(string input)
+        /// <summary>
+        /// Validates entered PIN against stored hash.
+        /// </summary>
+        public static bool ValidateUserPin(string inputPin)
         {
             try
             {
                 using (var conn = Database.GetConnection())
                 {
                     conn.Open();
-                    string query = "SELECT Password FROM Users WHERE Id = @userId";
+                    string query = "SELECT Pin FROM Users WHERE Id = @userId";
                     using (var cmd = new SqliteCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
@@ -76,7 +81,7 @@ namespace BuzzLock
                         if (string.IsNullOrEmpty(storedHash))
                             return false;
 
-                        return PasswordHasher.Verify(input, storedHash);
+                        return PasswordHasher.Verify(inputPin, storedHash);
                     }
                 }
             }
@@ -85,7 +90,6 @@ namespace BuzzLock
                 return false;
             }
         }
-
 
         private void LoadAccountData()
         {
@@ -156,11 +160,10 @@ namespace BuzzLock
                 return;
             }
 
-            // Encrypt the password (no hashing)
             string encryptedPassword = EncryptionHelper.EncryptString(password);
 
             int retryCount = 5;
-            int delay = 300; // milliseconds
+            int delay = 300;
             bool success = false;
 
             while (!success && retryCount > 0)
@@ -170,17 +173,15 @@ namespace BuzzLock
                     using (var conn = Database.GetConnection())
                     {
                         conn.Open();
-
                         using (var pragmaCmd = conn.CreateCommand())
                         {
                             pragmaCmd.CommandText = "PRAGMA busy_timeout = 5000;";
                             pragmaCmd.ExecuteNonQuery();
                         }
 
-                        // Update only the EncryptedPassword field (no hashing)
                         string update = @"UPDATE Vault 
-                                  SET Account = @a, Username = @u, EncryptedPassword = @ep 
-                                  WHERE Id = @id AND UserId = @userId";
+                                          SET Account = @a, Username = @u, EncryptedPassword = @ep 
+                                          WHERE Id = @id AND UserId = @userId";
 
                         using (var cmd = new SqliteCommand(update, conn))
                         {
@@ -189,14 +190,12 @@ namespace BuzzLock
                             cmd.Parameters.AddWithValue("@ep", encryptedPassword);
                             cmd.Parameters.AddWithValue("@id", accountId);
                             cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
-
                             cmd.ExecuteNonQuery();
                         }
                     }
-
                     success = true;
                 }
-                catch (SqliteException ex) when (ex.SqliteErrorCode == 5) // SQLITE_BUSY
+                catch (SqliteException ex) when (ex.SqliteErrorCode == 5)
                 {
                     retryCount--;
                     System.Threading.Thread.Sleep(delay);
@@ -220,7 +219,6 @@ namespace BuzzLock
             }
         }
 
-
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -242,11 +240,6 @@ namespace BuzzLock
             {
                 CustomMessageBox.Show("No password to copy. Generate one first.", "BuzzLock");
             }
-        }
-
-        private void ViewAccountForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

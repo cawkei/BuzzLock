@@ -46,12 +46,15 @@
             // showPassButton
             // 
             showPassButton.BackColor = Color.Transparent;
+            showPassButton.BackgroundImageLayout = ImageLayout.Stretch;
+            showPassButton.Cursor = Cursors.Hand;
             showPassButton.FlatAppearance.BorderSize = 0;
             showPassButton.FlatStyle = FlatStyle.Flat;
-            showPassButton.Location = new Point(220, 109);
+            showPassButton.Location = new Point(209, 104);
             showPassButton.Name = "showPassButton";
-            showPassButton.Size = new Size(51, 27);
+            showPassButton.Size = new Size(69, 39);
             showPassButton.TabIndex = 1;
+            showPassButton.TabStop = false;
             showPassButton.UseVisualStyleBackColor = false;
             showPassButton.Click += ShowPassButton_Click;
             // 
@@ -64,8 +67,6 @@
             ClientSize = new Size(301, 198);
             Controls.Add(showPassButton);
             Controls.Add(passwordTextBox);
-            DoubleBuffered = true;
-            FormBorderStyle = FormBorderStyle.None;
             Name = "EnterPinForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterParent;

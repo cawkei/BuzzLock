@@ -103,7 +103,7 @@ namespace BuzzLock
             numericUpDownLength.Maximum = new decimal(new int[] { 130, 0, 0, 0 });
             numericUpDownLength.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
             numericUpDownLength.Name = "numericUpDownLength";
-            numericUpDownLength.Size = new Size(108, 26);
+            numericUpDownLength.Size = new Size(108, 31);
             numericUpDownLength.TabIndex = 1;
             numericUpDownLength.Value = new decimal(new int[] { 25, 0, 0, 0 });
             numericUpDownLength.ValueChanged += numericUpDownLength_ValueChanged;

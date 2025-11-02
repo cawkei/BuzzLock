@@ -94,7 +94,7 @@ namespace BuzzLock
             vaultGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             vaultGrid.Size = new Size(699, 319);
             vaultGrid.TabIndex = 0;
-            vaultGrid.CellContentClick += vaultGrid_CellContentClick;
+           // vaultGrid.CellContentClick += vaultGrid_CellContentClick;
             vaultGrid.CellDoubleClick += VaultGrid_CellDoubleClick;
             // 
             // btnAdd
@@ -253,12 +253,12 @@ namespace BuzzLock
             {
                 int id = Convert.ToInt32(vaultGrid.Rows[e.RowIndex].Cells["Id"].Value);
 
-                // Show EnterPinForm first
-                using (var pinForm = new EnterPinForm())
+                // Pass the current logged-in username to EnterPinForm
+                using (var pinForm = new EnterPinForm(Session.CurrentUsername))
                 {
                     if (pinForm.ShowDialog() == DialogResult.OK)
                     {
-                        // Password correct, open ViewAccountForm
+                        // PIN correct, open ViewAccountForm
                         using (var viewForm = new ViewAccountForm(id))
                         {
                             viewForm.ShowDialog();
@@ -267,15 +267,12 @@ namespace BuzzLock
                         // Refresh vault data after closing the view form
                         LoadVaultData();
                     }
-
+                    else
+                    {
+                        CustomMessageBox.Show("Access denied. Incorrect PIN or canceled.", "BuzzLock");
+                    }
                 }
             }
-        }
-
-        private void vaultGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-
-        {
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

@@ -40,7 +40,10 @@ namespace BuzzLock
 
         private void CustomBorderForm_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            Control clickedControl = this.GetChildAtPoint(e.Location);
+
+            //only drag if click is not on a child control
+            if (clickedControl == null && e.Button == MouseButtons.Left)
             {
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);

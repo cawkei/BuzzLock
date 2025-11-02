@@ -5,8 +5,6 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-
-
 namespace BuzzLock1._0.View
 {
     public partial class RegistrationPage : CustomBorderForm
@@ -26,10 +24,9 @@ namespace BuzzLock1._0.View
             registerBtn.UseVisualStyleBackColor = false;
             registerBtn.TabStop = false;
 
-            //enter key triggers register button
-            this.AcceptButton = registerBtn;
+            this.AcceptButton = registerBtn; // Enter key triggers register button
 
-            //tab order
+            // Tab order
             register_Email.TabIndex = 0;
             register_Username.TabIndex = 1;
             register_Password.TabIndex = 2;
@@ -38,7 +35,7 @@ namespace BuzzLock1._0.View
             loginLinkLabel.TabIndex = 5;
             showPW_chkbox.TabIndex = 6;
 
-            //password masking
+            // Password masking
             register_Password.UseSystemPasswordChar = true;
             register_ConfirmPassword.UseSystemPasswordChar = true;
         }
@@ -65,21 +62,24 @@ namespace BuzzLock1._0.View
                 return;
             }
 
-            // Password match check
+            //password match check
             if (password != confirmPassword)
             {
                 CustomMessageBox.Show("Passwords do not match.", "Error");
                 return;
             }
 
-            // Password strength validation
+            //password strength validation
             if (!Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"))
             {
                 CustomMessageBox.Show("Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, and a digit.", "Weak Password");
                 return;
             }
 
-            // Retry parameters
+            //hash email deterministically (SHA256)
+            string hashedEmail = EmailHasher.HashEmail(email);
+
+            //retry parameters
             int retryCount = 5;
             int delay = 300; // milliseconds
             bool success = false;
@@ -92,23 +92,22 @@ namespace BuzzLock1._0.View
                     {
                         conn.Open();
 
-                        // Busy timeout to wait if database is locked
                         using (var pragmaCmd = conn.CreateCommand())
                         {
                             pragmaCmd.CommandText = "PRAGMA busy_timeout = 5000;";
                             pragmaCmd.ExecuteNonQuery();
                         }
 
-                        // Create Users table if it doesn't exist (now with Email)
+                        // Create Users table if it doesn't exist
                         using (var cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = @"
-                        CREATE TABLE IF NOT EXISTS Users (
-                            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            Email TEXT NOT NULL UNIQUE,
-                            Username TEXT NOT NULL UNIQUE,
-                            Password TEXT NOT NULL
-                        );";
+                                CREATE TABLE IF NOT EXISTS Users (
+                                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    Email TEXT NOT NULL UNIQUE,
+                                    Username TEXT NOT NULL UNIQUE,
+                                    Password TEXT NOT NULL
+                                );";
                             cmd.ExecuteNonQuery();
                         }
 
@@ -117,7 +116,7 @@ namespace BuzzLock1._0.View
                         {
                             cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username OR Email = @Email;";
                             cmd.Parameters.AddWithValue("@Username", username);
-                            cmd.Parameters.AddWithValue("@Email", email);
+                            cmd.Parameters.AddWithValue("@Email", hashedEmail);
                             long count = (long)cmd.ExecuteScalar();
 
                             if (count > 0)
@@ -131,7 +130,7 @@ namespace BuzzLock1._0.View
                         using (var cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = "INSERT INTO Users (Email, Username, Password) VALUES (@Email, @Username, @Password);";
-                            cmd.Parameters.AddWithValue("@Email", email);
+                            cmd.Parameters.AddWithValue("@Email", hashedEmail);
                             cmd.Parameters.AddWithValue("@Username", username);
                             cmd.Parameters.AddWithValue("@Password", PasswordHasher.HashWithArgon2(password));
                             cmd.ExecuteNonQuery();
@@ -143,7 +142,7 @@ namespace BuzzLock1._0.View
                 catch (SqliteException ex) when (ex.SqliteErrorCode == 5) // SQLITE_BUSY
                 {
                     retryCount--;
-                    System.Threading.Thread.Sleep(delay); // wait before retry
+                    System.Threading.Thread.Sleep(delay);
                 }
                 catch (Exception ex)
                 {
@@ -155,9 +154,11 @@ namespace BuzzLock1._0.View
             if (success)
             {
                 CustomMessageBox.Show("Registration successful!", "Success");
-                StartPage sForm = new StartPage();
-                sForm.Show();
-                this.Hide();
+
+                //open SetupPin form for the newly registered user
+                SetupPin pinForm = new SetupPin(username); // <-- pass username here
+                pinForm.ShowDialog();
+                this.Close();
             }
             else
             {

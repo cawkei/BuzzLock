@@ -180,7 +180,7 @@
             Name = "ViewAccountForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BuzzLock";
-            Load += ViewAccountForm_Load;
+            //Load += ViewAccountForm_Load;
             ResumeLayout(false);
             PerformLayout();
 

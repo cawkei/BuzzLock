@@ -47,7 +47,7 @@
             txtUsername.ForeColor = Color.Black;
             txtUsername.Location = new Point(251, 241);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(551, 33);
+            txtUsername.Size = new Size(551, 39);
             txtUsername.TabIndex = 1;
             txtUsername.TextChanged += txtAccount_TextChanged;
             // 
@@ -58,7 +58,7 @@
             txtAccount.Font = new Font("Bahnschrift Condensed", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtAccount.Location = new Point(251, 168);
             txtAccount.Name = "txtAccount";
-            txtAccount.Size = new Size(551, 33);
+            txtAccount.Size = new Size(551, 39);
             txtAccount.TabIndex = 3;
             txtAccount.TextChanged += txtUsername_TextChanged;
             // 
@@ -70,7 +70,7 @@
             txtPassword.Location = new Point(251, 316);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(461, 33);
+            txtPassword.Size = new Size(461, 39);
             txtPassword.TabIndex = 5;
             txtPassword.TextChanged += txtPassword_TextChanged;
             // 

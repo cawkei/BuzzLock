@@ -80,10 +80,9 @@
             usernametxt.ForeColor = SystemColors.WindowText;
             usernametxt.Location = new Point(574, 188);
             usernametxt.Name = "usernametxt";
-            usernametxt.PlaceholderText = "Username";
+            usernametxt.PlaceholderText = "Email or Username";
             usernametxt.Size = new Size(262, 34);
             usernametxt.TabIndex = 0;
-            usernametxt.TabStop = true;
             usernametxt.TextChanged += usernametxt_TextChanged;
             // 
             // passwordtxt
@@ -95,7 +94,6 @@
             passwordtxt.PlaceholderText = "Password";
             passwordtxt.Size = new Size(262, 34);
             passwordtxt.TabIndex = 1;
-            passwordtxt.TabStop = true;
             passwordtxt.TextChanged += passwordtxt_TextChanged;
             // 
             // showPW_chkbox
@@ -155,7 +153,7 @@
 
         private void StartPage_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+          
         }
 
         #endregion
