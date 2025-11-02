@@ -17,7 +17,7 @@ namespace BuzzLock
             {
                 conn.Open();
 
-                // Create Vault table
+                //create Vault table
                 string createVaultTable = @"
                     CREATE TABLE IF NOT EXISTS Vault (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,10 +28,11 @@ namespace BuzzLock
                     );
                 ";
 
-                // Create Users table (for login & registration)
+                //create Users table (for login & registration)
                 string createUsersTable = @"
                     CREATE TABLE IF NOT EXISTS Users (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Email TEXT NOT NULL UNIQUE,
                         Username TEXT NOT NULL UNIQUE,
                         Password TEXT NOT NULL
                     );

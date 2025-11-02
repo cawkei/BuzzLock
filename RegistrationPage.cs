@@ -2,7 +2,10 @@
 using Microsoft.Data.Sqlite;
 using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
+
 
 namespace BuzzLock1._0.View
 {
@@ -23,39 +26,56 @@ namespace BuzzLock1._0.View
             registerBtn.UseVisualStyleBackColor = false;
             registerBtn.TabStop = false;
 
-
-            // Enter key triggers register button
+            //enter key triggers register button
             this.AcceptButton = registerBtn;
 
-            // Tab order
-            register_Username.TabIndex = 0;
-            register_Password.TabIndex = 1;
-            register_ConfirmPassword.TabIndex = 2;
-            registerBtn.TabIndex = 3;
-            loginLinkLabel.TabIndex = 4;
-            showPW_chkbox.TabIndex = 5;
+            //tab order
+            register_Email.TabIndex = 0;
+            register_Username.TabIndex = 1;
+            register_Password.TabIndex = 2;
+            register_ConfirmPassword.TabIndex = 3;
+            registerBtn.TabIndex = 4;
+            loginLinkLabel.TabIndex = 5;
+            showPW_chkbox.TabIndex = 6;
 
-            // Password masking
+            //password masking
             register_Password.UseSystemPasswordChar = true;
             register_ConfirmPassword.UseSystemPasswordChar = true;
         }
 
         private void registerBtn_Click(object sender, EventArgs e)
         {
+            string email = register_Email.Text.Trim();
             string username = register_Username.Text.Trim();
             string password = register_Password.Text.Trim();
             string confirmPassword = register_ConfirmPassword.Text.Trim();
 
-            // Basic validation
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
+            //basic validation
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(username) ||
+                string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
             {
                 CustomMessageBox.Show("Please fill in all fields.", "Warning");
                 return;
             }
 
+            //email format validation
+            if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                CustomMessageBox.Show("Please enter a valid email address.", "Invalid Email");
+                return;
+            }
+
+            // Password match check
             if (password != confirmPassword)
             {
                 CustomMessageBox.Show("Passwords do not match.", "Error");
+                return;
+            }
+
+            // Password strength validation
+            if (!Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"))
+            {
+                CustomMessageBox.Show("Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, and a digit.", "Weak Password");
                 return;
             }
 
@@ -79,35 +99,39 @@ namespace BuzzLock1._0.View
                             pragmaCmd.ExecuteNonQuery();
                         }
 
-                        // Create Users table if it doesn't exist
+                        // Create Users table if it doesn't exist (now with Email)
                         using (var cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = @"
                         CREATE TABLE IF NOT EXISTS Users (
                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            Email TEXT NOT NULL UNIQUE,
                             Username TEXT NOT NULL UNIQUE,
                             Password TEXT NOT NULL
                         );";
                             cmd.ExecuteNonQuery();
                         }
 
-                        // Check if username already exists
+                        // Check if email or username already exists
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username;";
+                            cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username OR Email = @Email;";
                             cmd.Parameters.AddWithValue("@Username", username);
+                            cmd.Parameters.AddWithValue("@Email", email);
                             long count = (long)cmd.ExecuteScalar();
+
                             if (count > 0)
                             {
-                                CustomMessageBox.Show("Username already exists.", "Error");
+                                CustomMessageBox.Show("Email or Username already exists.", "Error");
                                 return;
                             }
                         }
 
-                        // Insert new user with hashed password
+                        // Insert new user
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password);";
+                            cmd.CommandText = "INSERT INTO Users (Email, Username, Password) VALUES (@Email, @Username, @Password);";
+                            cmd.Parameters.AddWithValue("@Email", email);
                             cmd.Parameters.AddWithValue("@Username", username);
                             cmd.Parameters.AddWithValue("@Password", PasswordHasher.HashWithArgon2(password));
                             cmd.ExecuteNonQuery();
@@ -140,7 +164,6 @@ namespace BuzzLock1._0.View
                 CustomMessageBox.Show("Database is busy. Please try again.", "Error");
             }
         }
-
 
         private void login_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {

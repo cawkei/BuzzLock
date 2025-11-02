@@ -67,12 +67,12 @@ namespace BuzzLock1._0
 
         private void login_BTN_Click(object sender, EventArgs e)
         {
-            string username = usernametxt.Text.Trim();
+            string userInput = usernametxt.Text.Trim();
             string password = passwordtxt.Text.Trim();
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(userInput) || string.IsNullOrEmpty(password))
             {
-                CustomMessageBox.Show("Please enter both username and password.", "Warning");
+                CustomMessageBox.Show("Please enter both username/email and password.", "Warning");
                 return;
             }
 
@@ -82,10 +82,11 @@ namespace BuzzLock1._0
                 {
                     conn.Open();
 
-                    string query = "SELECT Id, Username, Password FROM Users WHERE Username = @Username";
+                    // Updated query: login via username OR email
+                    string query = "SELECT Id, Username, Password FROM Users WHERE Username = @Input OR Email = @Input";
                     using (var cmd = new SqliteCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.Parameters.AddWithValue("@Input", userInput);
 
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -93,16 +94,11 @@ namespace BuzzLock1._0
                             {
                                 string storedHashedPassword = reader.GetString(2);
 
-                                //verify entered password matches stored hash
                                 if (PasswordHasher.Verify(password, storedHashedPassword))
                                 {
-                                    //set session info for logged-in user
                                     Session.CurrentUserId = reader.GetInt32(0);
                                     Session.CurrentUsername = reader.GetString(1);
 
-                                    //MessageBox.Show($"Welcome, {Session.CurrentUsername}!", "BuzzLock", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                                    //open the user's vault
                                     VaultForm vaultForm = new VaultForm();
                                     vaultForm.FormClosed += (s, args) => this.Close();
                                     vaultForm.Show();
@@ -115,7 +111,7 @@ namespace BuzzLock1._0
                             }
                             else
                             {
-                                CustomMessageBox.Show("Username not found.", "Error");
+                                CustomMessageBox.Show("Username or email not found.", "Error");
                             }
                         }
                     }
@@ -126,6 +122,7 @@ namespace BuzzLock1._0
                 CustomMessageBox.Show("Error: " + ex.Message, "Database Error");
             }
         }
+
 
 
 
