@@ -24,6 +24,7 @@ namespace BuzzLock
 
             setupPintxt.UseSystemPasswordChar = true;
             this.AcceptButton = confirmBTN; // Press Enter to confirm
+            BtnShowHde.Click += BtnShowHde_click;
         }
 
         private void confirmBTN_click(object sender, EventArgs e)
