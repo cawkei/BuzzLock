@@ -59,15 +59,13 @@ namespace BuzzLock
             vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 222, 89);
-            dataGridViewCellStyle2.Font = new Font("ROG Fonts", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-
+            dataGridViewCellStyle2.Font = new Font("ROG Fonts", 15F, FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 222, 89);
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             vaultGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            vaultGrid.ColumnHeadersHeight = 35;
+            vaultGrid.ColumnHeadersHeight = 40;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 222, 89);
             dataGridViewCellStyle3.Font = new Font("Bahnschrift Condensed", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -94,7 +92,6 @@ namespace BuzzLock
             vaultGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             vaultGrid.Size = new Size(699, 319);
             vaultGrid.TabIndex = 0;
-           // vaultGrid.CellContentClick += vaultGrid_CellContentClick;
             vaultGrid.CellDoubleClick += VaultGrid_CellDoubleClick;
             // 
             // btnAdd
@@ -138,7 +135,7 @@ namespace BuzzLock
             txtSearch.Font = new Font("Bahnschrift Condensed", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSearch.Location = new Point(345, 68);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(477, 29);
+            txtSearch.Size = new Size(477, 25);
             txtSearch.TabIndex = 4;
             txtSearch.TextChanged += TxtSearch_TextChanged;
             // 
@@ -277,18 +274,15 @@ namespace BuzzLock
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            //dapat mag select row first
             if (vaultGrid.SelectedRows.Count == 0)
             {
                 CustomMessageBox.Show("Please select an account to delete.", "BuzzLock");
                 return;
             }
 
-            //get the selected row and its ID
             int id = Convert.ToInt32(vaultGrid.SelectedRows[0].Cells["Id"].Value);
             string accountName = vaultGrid.SelectedRows[0].Cells["Account"].Value.ToString();
 
-            //ask user for confirmation
             DialogResult confirm = CustomMessageBox.Show(
                 $"Are you sure you want to delete '{accountName}'?",
                 "Confirm Deletion",
@@ -299,20 +293,23 @@ namespace BuzzLock
             {
                 try
                 {
-                    using (var conn = new SqliteConnection("Data Source=BuzzLock.db;Mode=ReadWrite"))
+                    using (var conn = new SqliteConnection("Data Source=BuzzLock.db")) 
                     {
                         conn.Open();
 
                         using (var cmd = new SqliteCommand("DELETE FROM Vault WHERE Id = @id AND UserId = @userId", conn))
                         {
                             cmd.Parameters.AddWithValue("@id", id);
+
                             cmd.Parameters.AddWithValue("@userId", Session.CurrentUserId);
+
                             int rowsAffected = cmd.ExecuteNonQuery();
 
                             if (rowsAffected > 0)
                             {
                                 CustomMessageBox.Show("Account deleted successfully.", "BuzzLock");
-                                LoadVaultData(); //refresh the vault grid
+                                LoadVaultData(); 
+                                vaultGrid.ClearSelection();
                             }
                             else
                             {
@@ -327,6 +324,7 @@ namespace BuzzLock
                 }
             }
         }
+
     }
 }
 

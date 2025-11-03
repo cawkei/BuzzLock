@@ -22,14 +22,12 @@ namespace BuzzLock
             InitializeComponent();
             _username = username;
 
-            passwordTextBox.PasswordChar = '•';
-            passwordTextBox.UseSystemPasswordChar = true;
+            passwordTextBox.UseSystemPasswordChar = false;
+            passwordTextBox.PasswordChar = '*';
 
             // Trigger submit on Enter key
             passwordTextBox.KeyDown += PasswordTextBox_KeyDown;
 
-            // Assign button click for show/hide PIN
-            showPassButton.Click += ShowPassButton_Click;
             this.Load += EnterPinForm_Load;
         }
 
@@ -72,12 +70,6 @@ namespace BuzzLock
             }
         }
 
-        private void ShowPassButton_Click(object sender, EventArgs e)
-        {
-            pinVisible = !pinVisible;
-            passwordTextBox.PasswordChar = pinVisible ? '\0' : '•';
-        }
-
         private void EnterPinForm_Load(object sender, EventArgs e)
         {
             SetRoundedCorners();
@@ -99,8 +91,8 @@ namespace BuzzLock
             this.Region = new Region(path);
         }
 
-      // Validates the entered PIN against the database using PasswordHasher
-      
+        // Validates the entered PIN against the database using PasswordHasher
+
         private bool ValidateUserPin(string enteredPin)
         {
             try
@@ -128,6 +120,11 @@ namespace BuzzLock
                 //if DB fails, treat as invalid PIN
                 return false;
             }
+        }
+
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

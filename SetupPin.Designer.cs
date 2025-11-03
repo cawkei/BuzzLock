@@ -29,61 +29,53 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupPin));
-            confirmBTN = new Button();
             setupPintxt = new TextBox();
-            BtnShowHde = new Button();
+            confirmBTN = new Button();
             SuspendLayout();
+            // 
+            // setupPintxt
+            // 
+            setupPintxt.BackColor = Color.FromArgb(250, 228, 181);
+            setupPintxt.BorderStyle = BorderStyle.None;
+            setupPintxt.Font = new Font("Bahnschrift Condensed", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            setupPintxt.Location = new Point(118, 131);
+            setupPintxt.Margin = new Padding(2);
+            setupPintxt.Name = "setupPintxt";
+            setupPintxt.Size = new Size(155, 49);
+            setupPintxt.TabIndex = 1;
+            setupPintxt.TextAlign = HorizontalAlignment.Center;
+            setupPintxt.TextChanged += setupPintxt_TextChanged;
             // 
             // confirmBTN
             // 
             confirmBTN.BackColor = Color.Transparent;
+            confirmBTN.BackgroundImageLayout = ImageLayout.Stretch;
+            confirmBTN.Cursor = Cursors.Hand;
             confirmBTN.FlatAppearance.BorderSize = 0;
+            confirmBTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            confirmBTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             confirmBTN.FlatStyle = FlatStyle.Flat;
-            confirmBTN.Location = new Point(124, 199);
+            confirmBTN.Location = new Point(118, 206);
+            confirmBTN.Margin = new Padding(2);
             confirmBTN.Name = "confirmBTN";
-            confirmBTN.Size = new Size(163, 42);
-            confirmBTN.TabIndex = 0;
+            confirmBTN.Size = new Size(155, 42);
+            confirmBTN.TabIndex = 15;
+            confirmBTN.TabStop = false;
             confirmBTN.UseVisualStyleBackColor = false;
             confirmBTN.Click += confirmBTN_click;
             // 
-            // setupPintxt
-            // 
-            setupPintxt.BackColor = Color.Bisque;
-            setupPintxt.BorderStyle = BorderStyle.None;
-            setupPintxt.Location = new Point(80, 134);
-            setupPintxt.Name = "setupPintxt";
-            setupPintxt.Size = new Size(207, 24);
-            setupPintxt.TabIndex = 1;
-            // 
-            // BtnShowHde
-            // 
-            BtnShowHde.BackColor = Color.Transparent;
-            BtnShowHde.BackgroundImageLayout = ImageLayout.Stretch;
-            BtnShowHde.Cursor = Cursors.Hand;
-            BtnShowHde.FlatAppearance.BorderSize = 0;
-            BtnShowHde.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            BtnShowHde.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            BtnShowHde.FlatStyle = FlatStyle.Flat;
-            BtnShowHde.Location = new Point(292, 134);
-            BtnShowHde.Margin = new Padding(2);
-            BtnShowHde.Name = "BtnShowHde";
-            BtnShowHde.Size = new Size(44, 24);
-            BtnShowHde.TabIndex = 16;
-            BtnShowHde.TabStop = false;
-            BtnShowHde.UseVisualStyleBackColor = false;
-            BtnShowHde.Click += BtnShowHde_click;
-            // 
             // SetupPin
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(439, 415);
-            Controls.Add(BtnShowHde);
-            Controls.Add(setupPintxt);
+            ClientSize = new Size(392, 353);
             Controls.Add(confirmBTN);
+            Controls.Add(setupPintxt);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2);
             Name = "SetupPin";
             StartPosition = FormStartPosition.CenterParent;
             Text = "BuzzLock";
@@ -92,9 +84,7 @@
         }
 
         #endregion
-
-        private Button confirmBTN;
         private TextBox setupPintxt;
-        private Button BtnShowHde;
+        private Button confirmBTN;
     }
 }

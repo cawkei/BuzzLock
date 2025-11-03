@@ -30,43 +30,30 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnterPinForm));
             passwordTextBox = new TextBox();
-            showPassButton = new Button();
             SuspendLayout();
             // 
             // passwordTextBox
             // 
-            passwordTextBox.BackColor = Color.White;
+            passwordTextBox.BackColor = Color.FromArgb(201, 220, 113);
             passwordTextBox.BorderStyle = BorderStyle.None;
-            passwordTextBox.Font = new Font("Bahnschrift Condensed", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passwordTextBox.Location = new Point(27, 109);
+            passwordTextBox.Font = new Font("ROG Fonts", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passwordTextBox.Location = new Point(183, 80);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(187, 27);
+            passwordTextBox.Size = new Size(229, 48);
             passwordTextBox.TabIndex = 0;
-            // 
-            // showPassButton
-            // 
-            showPassButton.BackColor = Color.Transparent;
-            showPassButton.BackgroundImageLayout = ImageLayout.Stretch;
-            showPassButton.Cursor = Cursors.Hand;
-            showPassButton.FlatAppearance.BorderSize = 0;
-            showPassButton.FlatStyle = FlatStyle.Flat;
-            showPassButton.Location = new Point(209, 104);
-            showPassButton.Name = "showPassButton";
-            showPassButton.Size = new Size(69, 39);
-            showPassButton.TabIndex = 1;
-            showPassButton.TabStop = false;
-            showPassButton.UseVisualStyleBackColor = false;
-            showPassButton.Click += ShowPassButton_Click;
+            passwordTextBox.TextAlign = HorizontalAlignment.Center;
+            passwordTextBox.TextChanged += passwordTextBox_TextChanged;
             // 
             // EnterPinForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(301, 198);
-            Controls.Add(showPassButton);
+            BorderColor = Color.Transparent;
+            ClientSize = new Size(585, 186);
             Controls.Add(passwordTextBox);
+            ForeColor = SystemColors.ControlDark;
             Name = "EnterPinForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterParent;
@@ -78,6 +65,5 @@
         #endregion
 
         private TextBox passwordTextBox;
-        private Button showPassButton;
     }
 }

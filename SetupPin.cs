@@ -16,15 +16,14 @@ namespace BuzzLock
     public partial class SetupPin : Form
     {
         private readonly string _username; // Pass this from registration
-        private bool pinVisible = false;
+        private bool pinVisible = true;
         public SetupPin(string username)
         {
             InitializeComponent();
             _username = username;
 
-            setupPintxt.UseSystemPasswordChar = true;
+            setupPintxt.UseSystemPasswordChar = false;
             this.AcceptButton = confirmBTN; // Press Enter to confirm
-            BtnShowHde.Click += BtnShowHde_click;
         }
 
         private void confirmBTN_click(object sender, EventArgs e)
@@ -88,11 +87,11 @@ namespace BuzzLock
             }
         }
 
-        private void BtnShowHde_click(object sender, EventArgs e)
+      
+
+        private void setupPintxt_TextChanged(object sender, EventArgs e)
         {
-            pinVisible = !pinVisible; // Toggle visibility
-            setupPintxt.PasswordChar = pinVisible ? '\0' : '•';
-            BtnShowHde.Text = pinVisible ? "Hide" : "Show"; 
+
         }
     }
 }
