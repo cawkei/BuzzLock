@@ -41,11 +41,6 @@
             confirmEmailtxt.Margin = new Padding(2);
             confirmEmailtxt.Name = "confirmEmailtxt";
             confirmEmailtxt.Size = new Size(178, 16);
-
-            confirmEmailtxt.Location = new Point(65, 119);
-            confirmEmailtxt.Margin = new Padding(2, 2, 2, 2);
-            confirmEmailtxt.Name = "confirmEmailtxt";
-            confirmEmailtxt.Size = new Size(204, 20);
             confirmEmailtxt.TabIndex = 0;
             // 
             // confirmBTN
@@ -56,13 +51,10 @@
             confirmBTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
             confirmBTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             confirmBTN.FlatStyle = FlatStyle.Flat;
-            confirmBTN.Location = new Point(85, 132);
+            confirmBTN.Location = new Point(92, 136);
             confirmBTN.Margin = new Padding(2);
             confirmBTN.Name = "confirmBTN";
-            confirmBTN.Size = new Size(123, 26);
-            confirmBTN.Location = new Point(95, 172);
-            confirmBTN.Margin = new Padding(2, 2, 2, 2);
-            confirmBTN.Name = "confirmBTN";
+            confirmBTN.Size = new Size(108, 20);
             confirmBTN.TabIndex = 1;
             confirmBTN.TabStop = false;
             confirmBTN.UseVisualStyleBackColor = false;
@@ -71,7 +63,6 @@
             // Confirm_Email
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Bisque;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
@@ -80,13 +71,8 @@
             Controls.Add(confirmBTN);
             Controls.Add(confirmEmailtxt);
             DoubleBuffered = true;
-            Margin = new Padding(2);
-            ClientSize = new Size(351, 332);
-            Controls.Add(confirmBTN);
-            Controls.Add(confirmEmailtxt);
-            DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Confirm_Email";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BuzzLock";

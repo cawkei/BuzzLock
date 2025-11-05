@@ -53,7 +53,7 @@
             loginLinkLabel.Location = new Point(336, 534);
             loginLinkLabel.Margin = new Padding(2, 0, 2, 0);
             loginLinkLabel.Name = "loginLinkLabel";
-            loginLinkLabel.Size = new Size(59, 25);
+            loginLinkLabel.Size = new Size(46, 20);
             loginLinkLabel.TabIndex = 0;
             loginLinkLabel.TabStop = true;
             loginLinkLabel.Text = "Login";
@@ -66,7 +66,7 @@
             usernameLabel.Location = new Point(79, 190);
             usernameLabel.Margin = new Padding(2, 0, 2, 0);
             usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(75, 20);
+            usernameLabel.Size = new Size(60, 15);
             usernameLabel.TabIndex = 2;
             usernameLabel.Text = "Username";
             // 
@@ -77,7 +77,7 @@
             label1.Location = new Point(83, 271);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(70, 20);
+            label1.Size = new Size(57, 15);
             label1.TabIndex = 3;
             label1.Text = "Password";
             // 
@@ -88,7 +88,7 @@
             label2.Location = new Point(83, 372);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(0, 20);
+            label2.Size = new Size(0, 15);
             label2.TabIndex = 4;
             // 
             // register_Username
@@ -102,7 +102,7 @@
             register_Username.Location = new Point(83, 228);
             register_Username.Margin = new Padding(2);
             register_Username.Name = "register_Username";
-            register_Username.Size = new Size(270, 21);
+            register_Username.Size = new Size(270, 17);
             register_Username.TabIndex = 0;
             // 
             // register_Password
@@ -116,7 +116,7 @@
             register_Password.Location = new Point(83, 310);
             register_Password.Margin = new Padding(2);
             register_Password.Name = "register_Password";
-            register_Password.Size = new Size(270, 21);
+            register_Password.Size = new Size(270, 17);
             register_Password.TabIndex = 1;
             register_Password.UseSystemPasswordChar = true;
             // 
@@ -131,7 +131,7 @@
             register_ConfirmPassword.Location = new Point(87, 395);
             register_ConfirmPassword.Margin = new Padding(2);
             register_ConfirmPassword.Name = "register_ConfirmPassword";
-            register_ConfirmPassword.Size = new Size(266, 21);
+            register_ConfirmPassword.Size = new Size(266, 17);
             register_ConfirmPassword.TabIndex = 2;
             register_ConfirmPassword.UseSystemPasswordChar = true;
             // 
@@ -154,9 +154,9 @@
             registerBtn.FlatAppearance.MouseDownBackColor = Color.Transparent;
             registerBtn.FlatAppearance.MouseOverBackColor = Color.Transparent;
             registerBtn.FlatStyle = FlatStyle.Flat;
-            registerBtn.Location = new Point(133, 476);
+            registerBtn.Location = new Point(128, 467);
             registerBtn.Name = "registerBtn";
-            registerBtn.Size = new Size(163, 39);
+            registerBtn.Size = new Size(180, 51);
             registerBtn.TabIndex = 10;
             registerBtn.TabStop = false;
             registerBtn.UseVisualStyleBackColor = false;
@@ -169,7 +169,7 @@
             label4.Location = new Point(87, 355);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(127, 20);
+            label4.Size = new Size(104, 15);
             label4.TabIndex = 11;
             label4.Text = "Confirm Password";
             // 
@@ -181,7 +181,7 @@
             showPW_chkbox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             showPW_chkbox.Location = new Point(185, 438);
             showPW_chkbox.Name = "showPW_chkbox";
-            showPW_chkbox.Size = new Size(148, 27);
+            showPW_chkbox.Size = new Size(123, 23);
             showPW_chkbox.TabIndex = 12;
             showPW_chkbox.Text = "Show Password";
             showPW_chkbox.UseVisualStyleBackColor = false;
@@ -194,7 +194,7 @@
             label5.Location = new Point(83, 102);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(46, 20);
+            label5.Size = new Size(36, 15);
             label5.TabIndex = 13;
             label5.Text = "Email";
             // 
@@ -209,7 +209,7 @@
             register_Email.Location = new Point(87, 145);
             register_Email.Margin = new Padding(2);
             register_Email.Name = "register_Email";
-            register_Email.Size = new Size(270, 21);
+            register_Email.Size = new Size(270, 17);
             register_Email.TabIndex = 14;
             // 
             // RegistrationPage
