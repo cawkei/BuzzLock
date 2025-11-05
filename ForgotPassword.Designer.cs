@@ -41,20 +41,34 @@
             // 
             newPasstxt.BackColor = Color.Bisque;
             newPasstxt.BorderStyle = BorderStyle.None;
+<<<<<<< HEAD
             newPasstxt.Location = new Point(69, 112);
             newPasstxt.Margin = new Padding(2);
             newPasstxt.Name = "newPasstxt";
             newPasstxt.Size = new Size(187, 16);
+=======
+            newPasstxt.Location = new Point(79, 149);
+            newPasstxt.Margin = new Padding(2, 2, 2, 2);
+            newPasstxt.Name = "newPasstxt";
+            newPasstxt.Size = new Size(214, 20);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             newPasstxt.TabIndex = 0;
             // 
             // confirmPasstxt
             // 
             confirmPasstxt.BackColor = Color.Bisque;
             confirmPasstxt.BorderStyle = BorderStyle.None;
+<<<<<<< HEAD
             confirmPasstxt.Location = new Point(69, 170);
             confirmPasstxt.Margin = new Padding(2);
             confirmPasstxt.Name = "confirmPasstxt";
             confirmPasstxt.Size = new Size(187, 16);
+=======
+            confirmPasstxt.Location = new Point(79, 226);
+            confirmPasstxt.Margin = new Padding(2, 2, 2, 2);
+            confirmPasstxt.Name = "confirmPasstxt";
+            confirmPasstxt.Size = new Size(214, 20);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             confirmPasstxt.TabIndex = 1;
             // 
             // resetBTN
@@ -65,10 +79,17 @@
             resetBTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
             resetBTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             resetBTN.FlatStyle = FlatStyle.Flat;
+<<<<<<< HEAD
             resetBTN.Location = new Point(84, 232);
             resetBTN.Margin = new Padding(2);
             resetBTN.Name = "resetBTN";
             resetBTN.Size = new Size(139, 34);
+=======
+            resetBTN.Location = new Point(96, 309);
+            resetBTN.Margin = new Padding(2, 2, 2, 2);
+            resetBTN.Name = "resetBTN";
+            resetBTN.Size = new Size(159, 46);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             resetBTN.TabIndex = 2;
             resetBTN.TabStop = false;
             resetBTN.UseVisualStyleBackColor = false;
@@ -78,10 +99,17 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
+<<<<<<< HEAD
             label1.Location = new Point(59, 82);
             label1.Margin = new Padding(1, 0, 1, 0);
             label1.Name = "label1";
             label1.Size = new Size(84, 15);
+=======
+            label1.Location = new Point(67, 110);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(104, 20);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             label1.TabIndex = 4;
             label1.Text = "New Password";
             // 
@@ -89,10 +117,17 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
+<<<<<<< HEAD
             label2.Location = new Point(69, 142);
             label2.Margin = new Padding(1, 0, 1, 0);
             label2.Name = "label2";
             label2.Size = new Size(104, 15);
+=======
+            label2.Location = new Point(79, 190);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(127, 20);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             label2.TabIndex = 5;
             label2.Text = "Confirm Password";
             // 
@@ -102,10 +137,17 @@
             showPW_chkbox.BackColor = Color.Transparent;
             showPW_chkbox.Cursor = Cursors.Hand;
             showPW_chkbox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+<<<<<<< HEAD
             showPW_chkbox.Location = new Point(143, 201);
             showPW_chkbox.Margin = new Padding(2);
             showPW_chkbox.Name = "showPW_chkbox";
             showPW_chkbox.Size = new Size(108, 19);
+=======
+            showPW_chkbox.Location = new Point(163, 268);
+            showPW_chkbox.Margin = new Padding(2, 2, 2, 2);
+            showPW_chkbox.Name = "showPW_chkbox";
+            showPW_chkbox.Size = new Size(132, 24);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             showPW_chkbox.TabIndex = 13;
             showPW_chkbox.Text = "Show Password";
             showPW_chkbox.UseVisualStyleBackColor = false;
@@ -113,12 +155,20 @@
             // 
             // ForgotPassword
             // 
+<<<<<<< HEAD
             AutoScaleDimensions = new SizeF(7F, 15F);
+=======
+            AutoScaleDimensions = new SizeF(8F, 20F);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Bisque;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
+<<<<<<< HEAD
             ClientSize = new Size(326, 359);
+=======
+            ClientSize = new Size(373, 479);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             Controls.Add(showPW_chkbox);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -126,7 +176,12 @@
             Controls.Add(confirmPasstxt);
             Controls.Add(newPasstxt);
             DoubleBuffered = true;
+<<<<<<< HEAD
             Margin = new Padding(2);
+=======
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2, 2, 2, 2);
+>>>>>>> a99897fb407a9023698c4b7129127c51555b1961
             Name = "ForgotPassword";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BuzzLock";
