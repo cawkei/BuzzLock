@@ -18,6 +18,8 @@ namespace BuzzLock1._0
             login_BTN.FlatAppearance.BorderSize = 0;
             login_BTN.FlatAppearance.BorderColor = this.BackColor;
             login_BTN.UseVisualStyleBackColor = false;
+            login_BTN.FlatAppearance.BorderColor = this.BackColor;
+            login_BTN.UseVisualStyleBackColor = false;
             login_BTN.TabStop = false;
 
             usernametxt.TabIndex = 0;
@@ -125,11 +127,11 @@ namespace BuzzLock1._0
 
 
 
-
-        private void close_Click(object sender, EventArgs e)
+        private void ForgotPassword_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
+
 
         private void usernametxt_TextChanged(object sender, EventArgs e)
         {
@@ -157,7 +159,9 @@ namespace BuzzLock1._0
 
         private void forgotPasswordLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Confirm_Email sForm = new Confirm_Email();
+            sForm.Show();
+            this.Hide();
         }
     }
 }

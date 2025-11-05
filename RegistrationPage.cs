@@ -14,6 +14,8 @@ namespace BuzzLock1._0.View
             InitializeComponent();
             this.AutoScaleMode = AutoScaleMode.None;
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormClosed += RegistrationPage_FormClosed;
+
         }
 
         private void RegistrationPage_Load(object sender, EventArgs e)
@@ -178,6 +180,11 @@ namespace BuzzLock1._0.View
             bool show = showPW_chkbox.Checked;
             register_Password.UseSystemPasswordChar = !show;
             register_ConfirmPassword.UseSystemPasswordChar = !show;
+        }
+        private void RegistrationPage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StartPage loginForm = new StartPage();
+            loginForm.Show();
         }
     }
 }

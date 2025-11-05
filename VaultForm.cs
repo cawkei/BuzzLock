@@ -1,12 +1,9 @@
-﻿using System;
-
-using System.Data;
-
-using System.Drawing;
-
-using System.Windows.Forms;
-
+﻿using BuzzLock1._0;
 using Microsoft.Data.Sqlite;
+using System;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace BuzzLock
@@ -18,6 +15,7 @@ namespace BuzzLock
         private DataGridView vaultGrid;
         private Button btnAdd, btnGenerator;
         private Button btnDelete;
+        private Button btnLogout;
         private TextBox txtSearch;
 
         public VaultForm()
@@ -26,6 +24,8 @@ namespace BuzzLock
             InitializeComponent();
             Database.Initialize();
             LoadVaultData();
+            this.FormClosed += VaultForm_FormClosed;
+
 
         }
 
@@ -42,6 +42,7 @@ namespace BuzzLock
             btnGenerator = new Button();
             txtSearch = new TextBox();
             btnDelete = new Button();
+            btnLogout = new Button();
             ((System.ComponentModel.ISupportInitialize)vaultGrid).BeginInit();
             SuspendLayout();
             // 
@@ -59,7 +60,7 @@ namespace BuzzLock
             vaultGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 222, 89);
-            dataGridViewCellStyle2.Font = new Font("ROG Fonts", 15F, FontStyle.Bold);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 222, 89);
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
@@ -99,6 +100,7 @@ namespace BuzzLock
             btnAdd.BackColor = Color.Transparent;
             btnAdd.BackgroundImageLayout = ImageLayout.Stretch;
             btnAdd.Cursor = Cursors.Hand;
+            btnAdd.FlatAppearance.BorderColor = SystemColors.Control;
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnAdd.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -116,6 +118,7 @@ namespace BuzzLock
             btnGenerator.BackColor = Color.Transparent;
             btnGenerator.BackgroundImageLayout = ImageLayout.Stretch;
             btnGenerator.Cursor = Cursors.Hand;
+            btnGenerator.FlatAppearance.BorderColor = SystemColors.Control;
             btnGenerator.FlatAppearance.BorderSize = 0;
             btnGenerator.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnGenerator.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -135,7 +138,7 @@ namespace BuzzLock
             txtSearch.Font = new Font("Bahnschrift Condensed", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSearch.Location = new Point(345, 68);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(477, 25);
+            txtSearch.Size = new Size(477, 20);
             txtSearch.TabIndex = 4;
             txtSearch.TextChanged += TxtSearch_TextChanged;
             // 
@@ -144,6 +147,7 @@ namespace BuzzLock
             btnDelete.BackColor = Color.Transparent;
             btnDelete.BackgroundImageLayout = ImageLayout.Stretch;
             btnDelete.Cursor = Cursors.Hand;
+            btnDelete.FlatAppearance.BorderColor = SystemColors.Control;
             btnDelete.FlatAppearance.BorderSize = 0;
             btnDelete.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnDelete.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -156,12 +160,32 @@ namespace BuzzLock
             btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.Transparent;
+            btnLogout.BackgroundImage = (Image)resources.GetObject("btnLogout.BackgroundImage");
+            btnLogout.BackgroundImageLayout = ImageLayout.Zoom;
+            btnLogout.Cursor = Cursors.Hand;
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatAppearance.BorderColor = this.BackColor;
+            btnLogout.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnLogout.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Location = new Point(12, 443);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(48, 37);
+            btnLogout.TabIndex = 0;
+            btnLogout.TabStop = false;
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
+            // 
             // VaultForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(884, 492);
+            Controls.Add(btnLogout);
             Controls.Add(btnDelete);
             Controls.Add(btnAdd);
             Controls.Add(btnGenerator);
@@ -279,6 +303,13 @@ namespace BuzzLock
                 CustomMessageBox.Show("Please select an account to delete.", "BuzzLock");
                 return;
             }
+            var selectedRow = vaultGrid.SelectedRows[0];
+
+            if (selectedRow.Cells["Id"].Value == null || selectedRow.Cells["Account"].Value == null)
+            {
+                CustomMessageBox.Show("Invalid selection. Please try again.", "BuzzLock");
+                return;
+            }
 
             int id = Convert.ToInt32(vaultGrid.SelectedRows[0].Cells["Id"].Value);
             string accountName = vaultGrid.SelectedRows[0].Cells["Account"].Value.ToString();
@@ -289,11 +320,12 @@ namespace BuzzLock
                 MessageBoxButtons.YesNo
             );
 
+
             if (confirm == DialogResult.Yes)
             {
                 try
                 {
-                    using (var conn = new SqliteConnection("Data Source=BuzzLock.db")) 
+                    using (var conn = new SqliteConnection("Data Source=BuzzLock.db"))
                     {
                         conn.Open();
 
@@ -308,7 +340,7 @@ namespace BuzzLock
                             if (rowsAffected > 0)
                             {
                                 CustomMessageBox.Show("Account deleted successfully.", "BuzzLock");
-                                LoadVaultData(); 
+                                LoadVaultData();
                                 vaultGrid.ClearSelection();
                             }
                             else
@@ -325,6 +357,30 @@ namespace BuzzLock
             }
         }
 
+        private void VaultForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = CustomMessageBox.Show(
+               "Logout Account?",
+               "Logout Confirmation",
+               MessageBoxButtons.YesNo
+           );
+
+            if (result == DialogResult.Yes)
+            {
+                StartPage loginForm = new StartPage();
+                loginForm.Show();
+                this.Hide();
+            }
+            else if (result == DialogResult.No || result == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
     }
 }
 

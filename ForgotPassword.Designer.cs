@@ -41,39 +41,47 @@
             // 
             newPasstxt.BackColor = Color.Bisque;
             newPasstxt.BorderStyle = BorderStyle.None;
-            newPasstxt.Location = new Point(99, 186);
+            newPasstxt.Location = new Point(69, 112);
+            newPasstxt.Margin = new Padding(2);
             newPasstxt.Name = "newPasstxt";
-            newPasstxt.Size = new Size(267, 24);
+            newPasstxt.Size = new Size(187, 16);
             newPasstxt.TabIndex = 0;
             // 
             // confirmPasstxt
             // 
             confirmPasstxt.BackColor = Color.Bisque;
             confirmPasstxt.BorderStyle = BorderStyle.None;
-            confirmPasstxt.Location = new Point(99, 283);
+            confirmPasstxt.Location = new Point(69, 170);
+            confirmPasstxt.Margin = new Padding(2);
             confirmPasstxt.Name = "confirmPasstxt";
-            confirmPasstxt.Size = new Size(267, 24);
+            confirmPasstxt.Size = new Size(187, 16);
             confirmPasstxt.TabIndex = 1;
             // 
             // resetBTN
             // 
             resetBTN.BackColor = Color.Transparent;
+            resetBTN.Cursor = Cursors.Hand;
             resetBTN.FlatAppearance.BorderSize = 0;
+            resetBTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            resetBTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             resetBTN.FlatStyle = FlatStyle.Flat;
-            resetBTN.Location = new Point(120, 386);
+            resetBTN.Location = new Point(84, 232);
+            resetBTN.Margin = new Padding(2);
             resetBTN.Name = "resetBTN";
-            resetBTN.Size = new Size(199, 57);
+            resetBTN.Size = new Size(139, 34);
             resetBTN.TabIndex = 2;
+            resetBTN.TabStop = false;
             resetBTN.UseVisualStyleBackColor = false;
+            resetBTN.Click += resetBTN_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Location = new Point(84, 137);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(59, 82);
+            label1.Margin = new Padding(1, 0, 1, 0);
             label1.Name = "label1";
-            label1.Size = new Size(127, 25);
+            label1.Size = new Size(84, 15);
             label1.TabIndex = 4;
             label1.Text = "New Password";
             // 
@@ -81,10 +89,10 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Location = new Point(99, 237);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(69, 142);
+            label2.Margin = new Padding(1, 0, 1, 0);
             label2.Name = "label2";
-            label2.Size = new Size(156, 25);
+            label2.Size = new Size(104, 15);
             label2.TabIndex = 5;
             label2.Text = "Confirm Password";
             // 
@@ -94,9 +102,10 @@
             showPW_chkbox.BackColor = Color.Transparent;
             showPW_chkbox.Cursor = Cursors.Hand;
             showPW_chkbox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            showPW_chkbox.Location = new Point(204, 335);
+            showPW_chkbox.Location = new Point(143, 201);
+            showPW_chkbox.Margin = new Padding(2);
             showPW_chkbox.Name = "showPW_chkbox";
-            showPW_chkbox.Size = new Size(162, 29);
+            showPW_chkbox.Size = new Size(108, 19);
             showPW_chkbox.TabIndex = 13;
             showPW_chkbox.Text = "Show Password";
             showPW_chkbox.UseVisualStyleBackColor = false;
@@ -104,11 +113,12 @@
             // 
             // ForgotPassword
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Bisque;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(466, 599);
+            ClientSize = new Size(326, 359);
             Controls.Add(showPW_chkbox);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -116,8 +126,11 @@
             Controls.Add(confirmPasstxt);
             Controls.Add(newPasstxt);
             DoubleBuffered = true;
+            Margin = new Padding(2);
             Name = "ForgotPassword";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BuzzLock";
+            Load += ForgotPassword_Load;
             ResumeLayout(false);
             PerformLayout();
         }

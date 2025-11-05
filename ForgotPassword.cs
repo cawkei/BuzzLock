@@ -1,46 +1,40 @@
 ﻿using BuzzLock1._0;
 using Microsoft.Data.Sqlite;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BuzzLock
 {
     public partial class ForgotPassword : Form
     {
-        public ForgotPassword()
+        private string verifiedEmail; // store the confirmed email from Confirm_Email
+
+        public ForgotPassword(string email)
         {
             InitializeComponent();
+            verifiedEmail = email;
+            this.FormClosed += ForgotPassword_FormClosed ;
+
         }
 
         private void ForgotPassword_Load(object sender, EventArgs e)
         {
-            // Mask the password fields by default
             newPasstxt.UseSystemPasswordChar = true;
             confirmPasstxt.UseSystemPasswordChar = true;
 
-            // Optional: style button
             resetBTN.FlatStyle = FlatStyle.Flat;
             resetBTN.FlatAppearance.BorderSize = 0;
-        }
+            resetBTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            resetBTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            resetBTN.FlatAppearance.CheckedBackColor = Color.Transparent;
+            resetBTN.BackColor = Color.Transparent;
+            resetBTN.UseVisualStyleBackColor = false;
+            resetBTN.TabStop = false;
+            resetBTN.FlatAppearance.BorderColor = this.BackColor;
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            // not needed, can remove this if unused
-        }
+            resetBTN.BringToFront();
 
-        private void showPW_chkbox_click(object sender, EventArgs e)
-        {
-            // Toggle show/hide password
-            bool show = showPW_chkbox.Checked;
-            newPasstxt.UseSystemPasswordChar = !show;
-            confirmPasstxt.UseSystemPasswordChar = !show;
+            this.AcceptButton = resetBTN;
         }
 
         private void resetBTN_Click(object sender, EventArgs e)
@@ -69,18 +63,55 @@ namespace BuzzLock
                 return;
             }
 
-            // TODO: Add SQL code here to update user's password based on validated email
-            // Example:
-            // UPDATE Users SET Password = @HashedPassword WHERE Email = @Email;
+            try
+            {
+                string hashedEmail = EmailHasher.HashEmail(verifiedEmail);
+                string hashedPassword = PasswordHasher.HashWithArgon2(newPassword);
 
-            CustomMessageBox.Show("Password successfully reset!", "Success");
+                using (var conn = new SqliteConnection("Data Source=BuzzLock.db"))
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "UPDATE Users SET Password = @Password WHERE Email = @Email;";
+                        cmd.Parameters.AddWithValue("@Password", hashedPassword);
+                        cmd.Parameters.AddWithValue("@Email", hashedEmail);
 
-            // Return to login page
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            CustomMessageBox.Show("Password successfully reset!", "Success");
+                            StartPage loginForm = new StartPage();
+                            loginForm.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            CustomMessageBox.Show("No matching account found to update.", "Error");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show("Error: " + ex.Message, "Database Error");
+            }
+        }
+
+        // show/hide password
+        private void showPW_chkbox_click(object sender, EventArgs e)
+        {
+            bool show = showPW_chkbox.Checked;
+            newPasstxt.UseSystemPasswordChar = !show;
+            confirmPasstxt.UseSystemPasswordChar = !show;
+        }
+
+        // When user closes this form, go back to login page
+        private void ForgotPassword_FormClosed(object sender, FormClosedEventArgs e)
+        {
             StartPage loginForm = new StartPage();
             loginForm.Show();
-            this.Hide();
         }
     }
 }
-
-

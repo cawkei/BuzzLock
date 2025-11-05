@@ -36,7 +36,7 @@ namespace BuzzLock
             // 
             txtPassword.BackColor = Color.FromArgb(126, 217, 87);
             txtPassword.BorderStyle = BorderStyle.None;
-            txtPassword.Font = new Font("Bahnschrift SemiBold Condensed", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtPassword.Font = new Font("Bahnschrift SemiBold Condensed", 22F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtPassword.ForeColor = Color.Black;
             txtPassword.Location = new Point(101, 199);
             txtPassword.Multiline = true;

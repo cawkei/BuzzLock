@@ -37,33 +37,43 @@
             // 
             confirmEmailtxt.BackColor = Color.Bisque;
             confirmEmailtxt.BorderStyle = BorderStyle.None;
-            confirmEmailtxt.Location = new Point(81, 149);
+            confirmEmailtxt.Location = new Point(57, 89);
+            confirmEmailtxt.Margin = new Padding(2);
             confirmEmailtxt.Name = "confirmEmailtxt";
-            confirmEmailtxt.Size = new Size(255, 24);
+            confirmEmailtxt.Size = new Size(178, 16);
             confirmEmailtxt.TabIndex = 0;
             // 
             // confirmBTN
             // 
             confirmBTN.BackColor = Color.Transparent;
+            confirmBTN.Cursor = Cursors.Hand;
             confirmBTN.FlatAppearance.BorderSize = 0;
+            confirmBTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            confirmBTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             confirmBTN.FlatStyle = FlatStyle.Flat;
-            confirmBTN.Location = new Point(119, 215);
+            confirmBTN.Location = new Point(85, 132);
+            confirmBTN.Margin = new Padding(2);
             confirmBTN.Name = "confirmBTN";
-            confirmBTN.Size = new Size(178, 52);
+            confirmBTN.Size = new Size(123, 26);
             confirmBTN.TabIndex = 1;
+            confirmBTN.TabStop = false;
             confirmBTN.UseVisualStyleBackColor = false;
+            confirmBTN.Click += confirmBTN_click;
             // 
             // Confirm_Email
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Bisque;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(439, 415);
+            ClientSize = new Size(307, 249);
             Controls.Add(confirmBTN);
             Controls.Add(confirmEmailtxt);
             DoubleBuffered = true;
+            Margin = new Padding(2);
             Name = "Confirm_Email";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BuzzLock";
             Click += confirmBTN_click;
             ResumeLayout(false);

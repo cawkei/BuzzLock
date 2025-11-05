@@ -11,36 +11,40 @@ namespace BuzzLock
         private Button btnOk;
         private Button btnYes;
         private Button btnNo;
+        private MessageBoxButtons buttonType;
 
         private CustomMessageBox(string message, string title = "BuzzLock", MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
-            // Form settings
+            buttonType = buttons;
+
+            // Basic window setup
             Text = title;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterParent;
-            BackColor = Color.FromArgb(255, 222, 89);
+            BackColor = Color.FromArgb(255, 222, 89); // solid honey yellow
             Size = new Size(300, 150);
             MaximizeBox = false;
             MinimizeBox = false;
             ShowIcon = false;
             ShowInTaskbar = false;
+            DoubleBuffered = true;
 
-            // Play alert sound
+            //Sound
             SystemSounds.Exclamation.Play();
 
-            // Message label
+            //Message 
             lblMessage = new Label
             {
                 Text = message,
                 ForeColor = Color.Black,
                 Font = new Font("Bahnschrift Light Condensed", 11),
                 TextAlign = ContentAlignment.MiddleCenter,
-                Dock = DockStyle.Fill,
-                Padding = new Padding(10)
+                Size = new Size(280, 60),
+                Location = new Point(10, 15)
             };
             Controls.Add(lblMessage);
 
-            // Create buttons
+            //Buttons 
             if (buttons == MessageBoxButtons.OK)
             {
                 btnOk = CreateButton("OK", DialogResult.OK);
@@ -50,12 +54,24 @@ namespace BuzzLock
             {
                 btnYes = CreateButton("Yes", DialogResult.Yes);
                 btnNo = CreateButton("No", DialogResult.No);
-
-                btnYes.Location = new Point((ClientSize.Width / 2) - 85, ClientSize.Height - 45);
-                btnNo.Location = new Point((ClientSize.Width / 2) + 15, ClientSize.Height - 45);
-
                 Controls.Add(btnYes);
                 Controls.Add(btnNo);
+            }
+
+            Load += CustomMessageBox_Load;
+        }
+
+        private void CustomMessageBox_Load(object sender, EventArgs e)
+        {
+            if (buttonType == MessageBoxButtons.OK && btnOk != null)
+            {
+                btnOk.Location = new Point((ClientSize.Width - btnOk.Width) / 2, ClientSize.Height - 45);
+            }
+            else if (buttonType == MessageBoxButtons.YesNo && btnYes != null && btnNo != null)
+            {
+                int spacing = 15;
+                btnYes.Location = new Point((ClientSize.Width / 2) - btnYes.Width - spacing, ClientSize.Height - 45);
+                btnNo.Location = new Point((ClientSize.Width / 2) + spacing, ClientSize.Height - 45);
             }
         }
 
@@ -68,15 +84,13 @@ namespace BuzzLock
                 FlatStyle = FlatStyle.Flat,
                 FlatAppearance = { BorderSize = 0 },
                 Size = new Size(70, 28),
-                DialogResult = result
+                DialogResult = result,
+                Anchor = AnchorStyles.Bottom
             };
             btn.Click += (s, e) => Close();
-            btn.Anchor = AnchorStyles.Bottom;
-            btn.Location = new Point((ClientSize.Width - btn.Width) / 2, ClientSize.Height - 45);
             return btn;
         }
 
-        // Static methods for convenience
         public static DialogResult Show(string message, string title = "BuzzLock")
         {
             using (var box = new CustomMessageBox(message, title, MessageBoxButtons.OK))
