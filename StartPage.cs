@@ -84,11 +84,30 @@ namespace BuzzLock1._0
                 {
                     conn.Open();
 
-                    // Updated query: login via username OR email
-                    string query = "SELECT Id, Username, Password FROM Users WHERE Username = @Input OR Email = @Input";
+                    // Check if input looks like an email
+                    bool isEmail = userInput.Contains("@");
+
+                    string query;
+                    if (isEmail)
+                    {
+                        query = "SELECT Id, Username, Password FROM Users WHERE Email = @HashedEmail";
+                    }
+                    else
+                    {
+                        query = "SELECT Id, Username, Password FROM Users WHERE Username = @Username";
+                    }
+
                     using (var cmd = new SqliteCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Input", userInput);
+                        if (isEmail)
+                        {
+                            string hashedEmail = EmailHasher.HashEmail(userInput);
+                            cmd.Parameters.AddWithValue("@HashedEmail", hashedEmail);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@Username", userInput);
+                        }
 
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -124,6 +143,7 @@ namespace BuzzLock1._0
                 CustomMessageBox.Show("Error: " + ex.Message, "Database Error");
             }
         }
+
 
 
 

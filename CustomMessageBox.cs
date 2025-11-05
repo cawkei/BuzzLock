@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace BuzzLock
 {
@@ -17,7 +18,7 @@ namespace BuzzLock
         {
             buttonType = buttons;
 
-            // Basic window setup
+            // Form settings
             Text = title;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterParent;
@@ -29,10 +30,10 @@ namespace BuzzLock
             ShowInTaskbar = false;
             DoubleBuffered = true;
 
-            //Sound
+            // Sound effect
             SystemSounds.Exclamation.Play();
 
-            //Message 
+            // Message label
             lblMessage = new Label
             {
                 Text = message,
@@ -44,7 +45,7 @@ namespace BuzzLock
             };
             Controls.Add(lblMessage);
 
-            //Buttons 
+            // Buttons
             if (buttons == MessageBoxButtons.OK)
             {
                 btnOk = CreateButton("OK", DialogResult.OK);
@@ -70,8 +71,12 @@ namespace BuzzLock
             else if (buttonType == MessageBoxButtons.YesNo && btnYes != null && btnNo != null)
             {
                 int spacing = 15;
-                btnYes.Location = new Point((ClientSize.Width / 2) - btnYes.Width - spacing, ClientSize.Height - 45);
-                btnNo.Location = new Point((ClientSize.Width / 2) + spacing, ClientSize.Height - 45);
+                int totalWidth = btnYes.Width + btnNo.Width + spacing;
+                int startX = (ClientSize.Width - totalWidth) / 2;
+                int y = ClientSize.Height - 45;
+
+                btnYes.Location = new Point(startX, y);
+                btnNo.Location = new Point(startX + btnYes.Width + spacing, y);
             }
         }
 
@@ -80,14 +85,56 @@ namespace BuzzLock
             Button btn = new Button
             {
                 Text = text,
-                BackColor = Color.FromArgb(255, 237, 164),
                 FlatStyle = FlatStyle.Flat,
                 FlatAppearance = { BorderSize = 0 },
-                Size = new Size(70, 28),
+                Size = new Size(75, 30),
                 DialogResult = result,
-                Anchor = AnchorStyles.Bottom
+                Anchor = AnchorStyles.None,
+                BackColor = Color.FromArgb(255, 237, 164),
+                ForeColor = Color.Black,
+                Font = new Font("Bahnschrift SemiBold", 10F),
+                Cursor = Cursors.Hand
             };
+
+            btn.Paint += (s, e) =>
+            {
+                Button b = (Button)s;
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+                using (SolidBrush brush = new SolidBrush(b.BackColor))
+                using (GraphicsPath path = new GraphicsPath())
+                {
+                    int radius = 10;
+                    Rectangle rect = new Rectangle(0, 0, b.Width, b.Height);
+                    path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
+                    path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
+                    path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
+                    path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
+                    path.CloseFigure();
+                    e.Graphics.FillPath(brush, path);
+                }
+
+                Rectangle textRect = b.ClientRectangle;
+                textRect.Y += 2; // move text 1 pixel down
+                TextRenderer.DrawText(e.Graphics, b.Text, b.Font, textRect, b.ForeColor,
+                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            };
+
+            //hover effect
+            btn.MouseEnter += (s, e) =>
+            {
+                btn.BackColor = Color.FromArgb(255, 245, 190);
+                btn.Invalidate();
+            };
+
+            btn.MouseLeave += (s, e) =>
+            {
+                btn.BackColor = Color.FromArgb(255, 237, 164);
+                btn.Invalidate();
+            };
+
             btn.Click += (s, e) => Close();
+
             return btn;
         }
 
