@@ -14,21 +14,36 @@ namespace BuzzLock
         {
             FormBorderStyle = FormBorderStyle.None;
             DoubleBuffered = true;
-            AutoScaleMode = AutoScaleMode.None; // prevents DPI scaling issues
+            AutoScaleMode = AutoScaleMode.None;
+
+            // Redraw border on load and resize
+            this.Load += (s, e) => Invalidate();
+            this.Resize += (s, e) => Invalidate();
+
+            this.MouseDown += CustomBorderForm_MouseDown;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Draw border fully inside the form
             using (Pen pen = new Pen(BorderColor, BorderThickness))
             {
-                e.Graphics.DrawRectangle(pen,
-                    BorderThickness / 2,
-                    BorderThickness / 2,
-                    ClientSize.Width - BorderThickness,
-                    ClientSize.Height - BorderThickness);
+                pen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset; // ensures border fits inside
+                Rectangle borderRect = new Rectangle(
+                    0,
+                    0,
+                    ClientSize.Width - 1,
+                    ClientSize.Height - 1
+                );
+                e.Graphics.DrawRectangle(pen, borderRect);
             }
         }
+
+        // Dragging the borderless form
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HTCAPTION = 0x2;
 
@@ -42,13 +57,11 @@ namespace BuzzLock
         {
             Control clickedControl = this.GetChildAtPoint(e.Location);
 
-            //only drag if click is not on a child control
             if (clickedControl == null && e.Button == MouseButtons.Left)
             {
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
         }
-
     }
 }

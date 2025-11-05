@@ -38,10 +38,10 @@
             setupPintxt.BackColor = Color.FromArgb(250, 228, 181);
             setupPintxt.BorderStyle = BorderStyle.None;
             setupPintxt.Font = new Font("Bahnschrift Condensed", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            setupPintxt.Location = new Point(118, 131);
+            setupPintxt.Location = new Point(103, 98);
             setupPintxt.Margin = new Padding(2);
             setupPintxt.Name = "setupPintxt";
-            setupPintxt.Size = new Size(155, 49);
+            setupPintxt.Size = new Size(136, 39);
             setupPintxt.TabIndex = 1;
             setupPintxt.TextAlign = HorizontalAlignment.Center;
             setupPintxt.TextChanged += setupPintxt_TextChanged;
@@ -55,10 +55,10 @@
             confirmBTN.FlatAppearance.MouseDownBackColor = Color.Transparent;
             confirmBTN.FlatAppearance.MouseOverBackColor = Color.Transparent;
             confirmBTN.FlatStyle = FlatStyle.Flat;
-            confirmBTN.Location = new Point(118, 206);
+            confirmBTN.Location = new Point(103, 154);
             confirmBTN.Margin = new Padding(2);
             confirmBTN.Name = "confirmBTN";
-            confirmBTN.Size = new Size(155, 42);
+            confirmBTN.Size = new Size(136, 32);
             confirmBTN.TabIndex = 15;
             confirmBTN.TabStop = false;
             confirmBTN.UseVisualStyleBackColor = false;
@@ -66,11 +66,12 @@
             // 
             // SetupPin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Bisque;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(392, 353);
+            ClientSize = new Size(343, 265);
             Controls.Add(confirmBTN);
             Controls.Add(setupPintxt);
             DoubleBuffered = true;

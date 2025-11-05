@@ -147,7 +147,7 @@ namespace BuzzLock1._0
 
 
 
-        private void ForgotPassword_FormClosed(object sender, FormClosedEventArgs e)
+        private void StartPage_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }

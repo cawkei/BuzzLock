@@ -43,10 +43,10 @@
             // 
             txtAccount.BackColor = Color.FromArgb(255, 222, 89);
             txtAccount.BorderStyle = BorderStyle.None;
-            txtAccount.Font = new Font("ROG Fonts", 28.1999989F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAccount.Font = new Font("Microsoft Sans Serif", 28.1999989F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtAccount.Location = new Point(71, 157);
             txtAccount.Name = "txtAccount";
-            txtAccount.Size = new Size(745, 57);
+            txtAccount.Size = new Size(745, 43);
             txtAccount.TabIndex = 1;
             // 
             // txtUsername
@@ -56,7 +56,7 @@
             txtUsername.Font = new Font("Bahnschrift Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtUsername.Location = new Point(243, 252);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(509, 37);
+            txtUsername.Size = new Size(509, 29);
             txtUsername.TabIndex = 3;
             // 
             // txtPassword
@@ -66,7 +66,7 @@
             txtPassword.Font = new Font("Bahnschrift Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPassword.Location = new Point(243, 319);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(509, 37);
+            txtPassword.Size = new Size(509, 29);
             txtPassword.TabIndex = 5;
             // 
             // btnCopy
@@ -160,6 +160,7 @@
             // 
             // ViewAccountForm
             // 
+            BackColor = Color.FromArgb(255, 237, 164);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(884, 492);
@@ -180,7 +181,6 @@
             Name = "ViewAccountForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BuzzLock";
-            //Load += ViewAccountForm_Load;
             ResumeLayout(false);
             PerformLayout();
 
