@@ -37,7 +37,7 @@
             passwordTextBox.BackColor = Color.FromArgb(201, 220, 113);
             passwordTextBox.BorderStyle = BorderStyle.None;
             passwordTextBox.Font = new Font("ROG Fonts", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passwordTextBox.Location = new Point(183, 80);
+            passwordTextBox.Location = new Point(181, 86);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(229, 48);
             passwordTextBox.TabIndex = 0;

@@ -41,18 +41,20 @@
             // 
             newPasstxt.BackColor = Color.Bisque;
             newPasstxt.BorderStyle = BorderStyle.None;
-            newPasstxt.Location = new Point(99, 186);
+            newPasstxt.Location = new Point(79, 149);
+            newPasstxt.Margin = new Padding(2, 2, 2, 2);
             newPasstxt.Name = "newPasstxt";
-            newPasstxt.Size = new Size(267, 24);
+            newPasstxt.Size = new Size(214, 20);
             newPasstxt.TabIndex = 0;
             // 
             // confirmPasstxt
             // 
             confirmPasstxt.BackColor = Color.Bisque;
             confirmPasstxt.BorderStyle = BorderStyle.None;
-            confirmPasstxt.Location = new Point(99, 283);
+            confirmPasstxt.Location = new Point(79, 226);
+            confirmPasstxt.Margin = new Padding(2, 2, 2, 2);
             confirmPasstxt.Name = "confirmPasstxt";
-            confirmPasstxt.Size = new Size(267, 24);
+            confirmPasstxt.Size = new Size(214, 20);
             confirmPasstxt.TabIndex = 1;
             // 
             // resetBTN
@@ -60,9 +62,10 @@
             resetBTN.BackColor = Color.Transparent;
             resetBTN.FlatAppearance.BorderSize = 0;
             resetBTN.FlatStyle = FlatStyle.Flat;
-            resetBTN.Location = new Point(120, 386);
+            resetBTN.Location = new Point(96, 309);
+            resetBTN.Margin = new Padding(2, 2, 2, 2);
             resetBTN.Name = "resetBTN";
-            resetBTN.Size = new Size(199, 57);
+            resetBTN.Size = new Size(159, 46);
             resetBTN.TabIndex = 2;
             resetBTN.UseVisualStyleBackColor = false;
             // 
@@ -70,10 +73,10 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Location = new Point(84, 137);
+            label1.Location = new Point(67, 110);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(127, 25);
+            label1.Size = new Size(104, 20);
             label1.TabIndex = 4;
             label1.Text = "New Password";
             // 
@@ -81,10 +84,10 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Location = new Point(99, 237);
+            label2.Location = new Point(79, 190);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(156, 25);
+            label2.Size = new Size(127, 20);
             label2.TabIndex = 5;
             label2.Text = "Confirm Password";
             // 
@@ -94,9 +97,10 @@
             showPW_chkbox.BackColor = Color.Transparent;
             showPW_chkbox.Cursor = Cursors.Hand;
             showPW_chkbox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            showPW_chkbox.Location = new Point(204, 335);
+            showPW_chkbox.Location = new Point(163, 268);
+            showPW_chkbox.Margin = new Padding(2, 2, 2, 2);
             showPW_chkbox.Name = "showPW_chkbox";
-            showPW_chkbox.Size = new Size(162, 29);
+            showPW_chkbox.Size = new Size(132, 24);
             showPW_chkbox.TabIndex = 13;
             showPW_chkbox.Text = "Show Password";
             showPW_chkbox.UseVisualStyleBackColor = false;
@@ -104,11 +108,11 @@
             // 
             // ForgotPassword
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(466, 599);
+            ClientSize = new Size(373, 479);
             Controls.Add(showPW_chkbox);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -116,6 +120,8 @@
             Controls.Add(confirmPasstxt);
             Controls.Add(newPasstxt);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2, 2, 2, 2);
             Name = "ForgotPassword";
             Text = "BuzzLock";
             ResumeLayout(false);
