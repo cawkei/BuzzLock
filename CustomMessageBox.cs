@@ -73,7 +73,7 @@ namespace BuzzLock
                 int spacing = 15;
                 int totalWidth = btnYes.Width + btnNo.Width + spacing;
                 int startX = (ClientSize.Width - totalWidth) / 2;
-                int y = ClientSize.Height - 45;
+                int y = ClientSize.Height - 35;
 
                 btnYes.Location = new Point(startX, y);
                 btnNo.Location = new Point(startX + btnYes.Width + spacing, y);
@@ -87,7 +87,7 @@ namespace BuzzLock
                 Text = text,
                 FlatStyle = FlatStyle.Flat,
                 FlatAppearance = { BorderSize = 0 },
-                Size = new Size(75, 30),
+                Size = new Size(100, 35),
                 DialogResult = result,
                 Anchor = AnchorStyles.None,
                 BackColor = Color.FromArgb(255, 237, 164),
@@ -115,7 +115,7 @@ namespace BuzzLock
                 }
 
                 Rectangle textRect = b.ClientRectangle;
-                textRect.Y += 2; // move text 1 pixel down
+                textRect.Y += 3; // move text 1 pixel down
                 TextRenderer.DrawText(e.Graphics, b.Text, b.Font, textRect, b.ForeColor,
                     TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
             };
